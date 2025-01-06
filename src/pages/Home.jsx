@@ -1,22 +1,21 @@
-import React, { useState } from "react"; // Importa o useState
+import React, { useState } from "react";
 import Header from "../components/header";
+import Carousel from "../components/Carousel";
 import VideoCard from "../components/VideoCard";
 import Popup from "../components/Popup";
 
 function Home() {
-  // Estado para controlar se o popup está aberto ou fechado
   const [isPopupOpen, setPopupOpen] = useState(false);
 
-  // Função para adicionar um vídeo (implementação futura)
   const addVideo = (video) => {
-    console.log("Vídeo adicionado:", video); // Apenas para teste
-    setPopupOpen(false); // Fecha o popup após adicionar
+    console.log("Vídeo adicionado:", video);
+    setPopupOpen(false);
   };
 
   return (
     <>
-      {/* Passa a função onAddVideo para o Header */}
       <Header onAddVideo={() => setPopupOpen(true)} />
+      <Carousel />
       <main>
         <h1>Galeria de Vídeos</h1>
         <div>
@@ -26,11 +25,10 @@ function Home() {
           />
         </div>
       </main>
-      {/* Popup renderizado com base no estado */}
       <Popup
         isOpen={isPopupOpen}
-        onClose={() => setPopupOpen(false)} // Fecha o popup
-        onAdd={addVideo} // Adiciona um vídeo
+        onClose={() => setPopupOpen(false)}
+        onAdd={addVideo}
       />
     </>
   );
