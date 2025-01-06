@@ -1,6 +1,5 @@
 @import "swiper/css";
 
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,12 +14,16 @@ code {
     monospace;
 }
 
+/* Ajustes para centralizar a galeria */
 .video-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Define 3 colunas */
-  gap: 20px; /* Espaçamento entre os vídeos */
-  justify-content: center; /* Centraliza os vídeos horizontalmente */
-  padding: 20px; /* Espaçamento interno */
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: 30px; /* Diminuindo o espaçamento entre os vídeos */
+  justify-content: center; /* Centraliza a grade horizontalmente */
+  align-items: center; /* Centraliza os vídeos verticalmente (se necessário) */
+  padding: 20px;
+  margin: 0 auto; /* Centraliza a galeria na página */
+  max-width: 1200px; /* Limita a largura máxima da galeria */
 }
 
 .video-card {
@@ -29,16 +32,26 @@ code {
   border-radius: 8px;
   overflow: hidden;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.video-card img {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Responsividade para tablets */
 @media (max-width: 768px) {
   .video-gallery {
     grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
+    gap: 15px; /* Ajusta o espaçamento */
   }
 }
 
+/* Responsividade para smartphones */
 @media (max-width: 480px) {
   .video-gallery {
     grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    gap: 10px; /* Espaçamento menor para smartphones */
   }
 }

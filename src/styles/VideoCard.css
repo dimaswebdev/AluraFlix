@@ -1,21 +1,31 @@
 .video-card {
-    width: 300px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  .video-thumbnail {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-  }
-  
-  .video-title {
-    padding: 8px;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
+  width: 100%; /* Ajuste automático para se adaptar à grade */
+  max-width: 300px; /* Largura máxima */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Adicionando bordas arredondadas para consistência */
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animações no hover */
+}
+
+.video-card:hover {
+  transform: translateY(-5px); /* Eleva ligeiramente no hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.video-thumbnail {
+  width: 100%; /* Garante que ocupa toda a largura */
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd; /* Separador visual */
+}
+
+.video-title {
+  padding: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* Cor do texto */
+  line-height: 1.2; /* Melhor legibilidade */
+}
