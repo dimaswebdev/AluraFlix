@@ -1,18 +1,19 @@
 import React from "react";
 import "../styles/Header.css";
 
-
-function Header() {
+function Header({ onAddVideo }) {
   return (
     <header className="header">
-      <h1 className="logo">Aluraflix</h1>
-      <nav>
-        <ul className="nav-links">
-          <li>Home</li>
-          <li>Favoritos</li>
-          <li>Adicionar Vídeo</li>
-        </ul>
-      </nav>
+      <div className="logo-container">
+        <img src="/dimas-logo.png" alt="Logo Aluraflix" className="logo-image" />
+        <h1 className="logo-text">Aluraflix</h1>
+      </div>
+      <div className="search-bar">
+        <input type="text" placeholder="Buscar vídeos..." />
+      </div>
+      <button className="add-video-button" onClick={onAddVideo}>
+        Adicionar Vídeo
+      </button>
     </header>
   );
 }
