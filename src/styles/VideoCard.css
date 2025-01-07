@@ -3,7 +3,7 @@
   max-width: 300px; /* Largura máxima */
   background-color: white;
   border: 1px solid #ddd;
-  border-radius: 8px; /* Adicionando bordas arredondadas para consistência */
+  border-radius: 0px; /* Adicionando bordas arredondadas para consistência */
   overflow: hidden;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */

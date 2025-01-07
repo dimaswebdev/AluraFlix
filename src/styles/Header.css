@@ -1,51 +1,99 @@
-.header {
+/* Cabeçalho */
+header {
+  background-color: var(--primary-color, #007bff); /* Cor padrão se não usar CSS customizado */
+  color: var(--text-color, #fff); /* Cor padrão do texto */
+  height: 79px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0px 32px;
-  background-color: #007bff;
-  color: white;
+  justify-content: center;
+  position: sticky; /* Fica fixo no topo ao rolar */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
+/* Conteúdo do Cabeçalho */
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Limita o conteúdo ao centro */
+  padding: 0 1rem;
+}
+
+/* Logo e Título */
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-.logo-image {
-  width: 40px;
-  height: 40px;
+.logo {
+  width: 35px;
+  height: 35px;
 }
 
-.logo-text {
-  font-size: 24px;
+.site-title {
+  font-size: 1.5rem;
   font-weight: bold;
+  color: var(--text-color, #fff);
 }
 
-.search-bar {
-  flex: 1;
+/* Barra de Pesquisa */
+.search-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex: 1; /* Ocupa o espaço restante */
+  margin: 0 1rem;
 }
 
-.search-bar input {
-  width: 60%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+.search-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
 }
 
-.add-video-button {
-  padding: 8px 16px;
-  background-color: #28a745;
-  color: white;
+.search-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--secondary-color, #28a745); /* Cor do botão de busca */
+  color: var(--text-color, #fff);
   border: none;
-  border-radius: 4px;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
-  font-size: 16px;
 }
 
-.add-video-button:hover {
-  background-color: #218838;
+.search-btn i {
+  font-size: 1.2rem;
+}
+
+.search-btn:hover {
+  background-color: #6700CC; /* Cor de hover no botão */
+}
+
+/* Ícones do Cabeçalho */
+.icons-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-color, #fff);
+  cursor: pointer;
+  position: relative;
+}
+
+.icon-item i {
+  font-size: 1.5rem;
+}
+
+.icon-item:hover {
+  color: #FFF2FF;
 }

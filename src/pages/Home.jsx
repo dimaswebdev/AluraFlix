@@ -3,11 +3,12 @@ import Header from "../components/header";
 import Carousel from "../components/Carousel";
 import VideoCard from "../components/VideoCard";
 import Popup from "../components/Popup";
+import Footer from "../components/Footer"; // Importa o footer
+import SocialMedia from "../components/SocialMedia"; // Importe o componente
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
-  // Lista de vídeos para a galeria
   const videos = [
     { id: 1, title: "Vídeo 1", thumbnail: "https://via.placeholder.com/300" },
     { id: 2, title: "Vídeo 2", thumbnail: "https://via.placeholder.com/300" },
@@ -25,11 +26,10 @@ function Home() {
   return (
     <>
       <Header onAddVideo={() => setPopupOpen(true)} />
-      <Carousel /> {/* Carrossel aparece abaixo do Header */}
+      <Carousel />
       <main>
         <h1>Galeria de Vídeos</h1>
         <div className="video-gallery">
-          {/* Renderiza cada vídeo */}
           {videos.map((video) => (
             <VideoCard
               key={video.id}
@@ -44,6 +44,9 @@ function Home() {
         onClose={() => setPopupOpen(false)}
         onAdd={addVideo}
       />
+       <SocialMedia /> {/* Adicione o componente de redes sociais */}
+       
+      <Footer /> {/* Adiciona o footer */}
     </>
   );
 }
