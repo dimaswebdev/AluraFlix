@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
 import VideoCard from "../components/VideoCard";
@@ -11,33 +11,41 @@ import "../styles/Home.css"; // Importa o estilo adicional
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
-  // Lista de vídeos (com placeholders)
   const videoSections = [
     {
       id: 1,
       title: "Recomendados para Você",
-      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
     },
     {
       id: 2,
       title: "Tendências",
-      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
     },
     {
       id: 3,
       title: "Novidades",
-      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
     },
     {
       id: 4,
       title: "Continue Assistindo",
-      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
     },
   ];
+
+  const sectionRefs = useRef([]);
 
   const addVideo = (video) => {
     console.log("Vídeo adicionado:", video);
     setPopupOpen(false);
+  };
+
+  const scrollSection = (ref, direction) => {
+    if (ref) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      ref.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
   };
 
   return (
@@ -51,22 +59,35 @@ function Home() {
       {/* Cabeçalho */}
       <Header onAddVideo={() => setPopupOpen(true)} />
 
-      {/* Carrossel de vídeos */}
+      {/* Carrossel */}
       <Carousel />
 
       {/* Conteúdo principal */}
       <main>
-        {videoSections.map((section) => (
+        {videoSections.map((section, index) => (
           <section key={section.id} className="video-section">
             <h2 className="video-section-title">{section.title}</h2>
-            <div className="video-section-gallery">
-              {section.videos.map((video, index) => (
-                <VideoCard
-                  key={index}
-                  title=""
-                  thumbnail={video.thumbnail}
-                />
-              ))}
+            <div className="video-section-controls">
+              <button
+                className="scroll-button left"
+                onClick={() => scrollSection(sectionRefs.current[index], "left")}
+              >
+                &lt;
+              </button>
+              <div
+                className="video-section-gallery"
+                ref={(el) => (sectionRefs.current[index] = el)}
+              >
+                {section.videos.slice(0, 4).map((video, videoIndex) => (
+                  <VideoCard key={videoIndex} title="" thumbnail={video.thumbnail} />
+                ))}
+              </div>
+              <button
+                className="scroll-button right"
+                onClick={() => scrollSection(sectionRefs.current[index], "right")}
+              >
+                &gt;
+              </button>
             </div>
           </section>
         ))}
@@ -81,6 +102,8 @@ function Home() {
 
       {/* Redes sociais fixas */}
       <SocialMedia />
+
+      <div className="spacer"></div> {/* Espaço antes do footer */}
 
       {/* Rodapé */}
       <Footer />
