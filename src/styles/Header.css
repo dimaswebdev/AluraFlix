@@ -1,12 +1,11 @@
 /* Cabeçalho */
 header {
-  /* background-color: var(--primary-color, #007bff); Cor padrão se não usar CSS customizado */
-  color: var(--text-color, #fff); /* Cor padrão do texto */
+  color: var(--text-color, #fff);
   height: 79px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: sticky; /* Fica fixo no topo ao rolar */
+  position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -18,7 +17,7 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px; /* Limita o conteúdo ao centro */
+  max-width: 1200px;
   padding: 0 1rem;
 }
 
@@ -40,48 +39,11 @@ header {
   color: var(--text-color, #fff);
 }
 
-/* Barra de Pesquisa */
-.search-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.search-input {
-  width: 0;
-  opacity: 0;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.search-container.search-open .search-input {
-  width: 200px; /* Largura expandida */
-  opacity: 1;
-  padding: 0.5rem;
-}
-
-.search-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.search-btn:hover {
-  color: #ccc;
-}
-
-
 /* Ícones do Cabeçalho */
 .icons-container {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2rem; /* Espaçamento entre os ícones */
 }
 
 .icon-item {
@@ -100,4 +62,72 @@ header {
 
 .icon-item:hover {
   color: #FFF2FF;
+}
+
+/* Barra de Pesquisa */
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.search-input {
+  width: 0;
+  opacity: 0;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-container.search-open .search-input {
+  width: 400px; /* Largura expandida */
+  opacity: 1;
+  padding: 0.5rem;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  color: #ccc;
+}
+/* Mensagem de Erro */
+.error-message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.tooltip {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: #ff4d4d;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
