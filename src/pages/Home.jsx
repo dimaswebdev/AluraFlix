@@ -1,21 +1,38 @@
 import React, { useState } from "react";
-import Header from "../components/header";
+import Header from "../components/Header";
 import Carousel from "../components/Carousel";
 import VideoCard from "../components/VideoCard";
 import Popup from "../components/Popup";
-import Footer from "../components/Footer"; // Importa o footer
-import SocialMedia from "../components/SocialMedia"; // Importe o componente
+import Footer from "../components/Footer";
+import SocialMedia from "../components/SocialMedia";
+
+import "../styles/Home.css"; // Importa o estilo adicional
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
-  const videos = [
-    { id: 1, title: "Vídeo 1", thumbnail: "https://via.placeholder.com/300" },
-    { id: 2, title: "Vídeo 2", thumbnail: "https://via.placeholder.com/300" },
-    { id: 3, title: "Vídeo 3", thumbnail: "https://via.placeholder.com/300" },
-    { id: 4, title: "Vídeo 4", thumbnail: "https://via.placeholder.com/300" },
-    { id: 5, title: "Vídeo 5", thumbnail: "https://via.placeholder.com/300" },
-    { id: 6, title: "Vídeo 6", thumbnail: "https://via.placeholder.com/300" },
+  // Lista de vídeos (com placeholders)
+  const videoSections = [
+    {
+      id: 1,
+      title: "Recomendados para Você",
+      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+    },
+    {
+      id: 2,
+      title: "Tendências",
+      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+    },
+    {
+      id: 3,
+      title: "Novidades",
+      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+    },
+    {
+      id: 4,
+      title: "Continue Assistindo",
+      videos: Array(6).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+    },
   ];
 
   const addVideo = (video) => {
@@ -24,30 +41,50 @@ function Home() {
   };
 
   return (
-    <>
+    <div className="home">
+      {/* Fundo com imagem e gradiente */}
+      <div className="background-container">
+        <div className="background-image"></div>
+        <div className="background-gradient"></div>
+      </div>
+
+      {/* Cabeçalho */}
       <Header onAddVideo={() => setPopupOpen(true)} />
+
+      {/* Carrossel de vídeos */}
       <Carousel />
+
+      {/* Conteúdo principal */}
       <main>
-        <h1>Galeria de Vídeos</h1>
-        <div className="video-gallery">
-          {videos.map((video) => (
-            <VideoCard
-              key={video.id}
-              title={video.title}
-              thumbnail={video.thumbnail}
-            />
-          ))}
-        </div>
+        {videoSections.map((section) => (
+          <section key={section.id} className="video-section">
+            <h2 className="video-section-title">{section.title}</h2>
+            <div className="video-section-gallery">
+              {section.videos.map((video, index) => (
+                <VideoCard
+                  key={index}
+                  title=""
+                  thumbnail={video.thumbnail}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
+
+      {/* Popup para adicionar vídeo */}
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setPopupOpen(false)}
         onAdd={addVideo}
       />
-       <SocialMedia /> {/* Adicione o componente de redes sociais */}
-       
-      <Footer /> {/* Adiciona o footer */}
-    </>
+
+      {/* Redes sociais fixas */}
+      <SocialMedia />
+
+      {/* Rodapé */}
+      <Footer />
+    </div>
   );
 }
 

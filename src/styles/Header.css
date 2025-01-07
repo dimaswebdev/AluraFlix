@@ -1,6 +1,6 @@
 /* Cabeçalho */
 header {
-  background-color: var(--primary-color, #007bff); /* Cor padrão se não usar CSS customizado */
+  /* background-color: var(--primary-color, #007bff); Cor padrão se não usar CSS customizado */
   color: var(--text-color, #fff); /* Cor padrão do texto */
   height: 79px;
   display: flex;

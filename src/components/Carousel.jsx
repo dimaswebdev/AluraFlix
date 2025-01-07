@@ -8,7 +8,7 @@ function Carousel() {
     {
       title: "SEO com React",
       description: "Aprenda a otimizar SEO usando React.",
-      image: "https://via.placeholder.com/300x200", // Imagem provisória
+      image: "/img/imagem - 01.png", // Imagem provisória
     },
     {
       title: "Performance com Next.js",

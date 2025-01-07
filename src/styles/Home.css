@@ -1,0 +1,134 @@
+/* Fundo gradiente da Home */
+.home-background {
+    position: fixed; /* Fixado para cobrir toda a tela */
+    width: 100%;
+    height: 100vh; /* Preenche toda a altura da tela */
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    background: linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, #141414 100%);
+    opacity: 1; /* Certifica que o gradiente está visível */
+    z-index: -1; /* Coloca o fundo atrás de todos os elementos */
+  }
+  
+  /* Contêiner para a imagem e gradiente */
+  .background-container {
+    position: fixed; /* Fixado para cobrir a tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Preenche toda a altura da tela */
+    z-index: -1; /* Certifica que está atrás dos elementos */
+    overflow: hidden; /* Evita overflow */
+  }
+  
+  /* Imagem de fundo */
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/img/imagem\ -\ 01.png"); /* Corrigido o caminho */
+    background-size: cover; /* Garante que a imagem cobre todo o espaço */
+    background-position: center; /* Centraliza a imagem */
+    filter: brightness(0.6); /* Escurece a imagem levemente */
+  }
+  
+  /* Gradiente */
+  .background-gradient {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/img/BG-Fade.png"); /* Corrigido o caminho */
+    opacity: 1; /* Torna o gradiente visível */
+  }
+  
+  /* Título principal */
+  .main-title {
+    font-size: 2rem;
+    text-align: center;
+    color: #fff;
+    margin: 20px 0;
+  }
+  
+  /* Galeria de vídeos */
+  .video-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 vídeos por linha */
+    gap: 20px; /* Espaçamento entre os vídeos */
+    justify-content: center; /* Centraliza a galeria */
+    padding: 20px;
+  }
+  
+  /* Responsividade para tablets */
+  @media (max-width: 768px) {
+    .video-gallery {
+      grid-template-columns: repeat(2, 1fr); /* 2 vídeos por linha em tablets */
+    }
+  }
+  
+  /* Responsividade para smartphones */
+  @media (max-width: 480px) {
+    .video-gallery {
+      grid-template-columns: 1fr; /* 1 vídeo por linha em smartphones */
+    }
+  }
+  /* Seção de Vídeos */
+.video-section {
+    width: 1364px;
+    margin: 20px auto;
+    padding: 10px 0;
+    position: relative;
+  }
+  
+  /* Título da Seção */
+  .video-section-title {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+  
+  /* Galeria de vídeos na seção */
+  .video-section-gallery {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os vídeos */
+    overflow-x: auto; /* Permite rolar horizontalmente */
+    padding: 0 15px;
+  }
+  
+  /* Estilo dos cards de vídeo */
+  .video-card {
+    width: 260px;
+    height: 146px;
+    background-color: #333;
+    border-radius: 4px 0 0 0;
+    overflow: hidden;
+    flex-shrink: 0; /* Impede que os cards encolham */
+    position: relative;
+  }
+  
+  .video-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 768px) {
+    .video-section {
+      width: 100%;
+    }
+  
+    .video-section-gallery {
+      padding: 0 10px;
+    }
+  
+    .video-card {
+      width: 200px;
+      height: 112px;
+    }
+  }
+    
