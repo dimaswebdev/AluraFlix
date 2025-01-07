@@ -44,34 +44,38 @@ header {
 .search-container {
   display: flex;
   align-items: center;
-  flex: 1; /* Ocupa o espaço restante */
-  margin: 0 1rem;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .search-input {
-  flex: 1;
+  width: 0;
+  opacity: 0;
   padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
+  border-radius: 4px;
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-container.search-open .search-input {
+  width: 200px; /* Largura expandida */
+  opacity: 1;
+  padding: 0.5rem;
 }
 
 .search-btn {
-  padding: 0.5rem 1rem;
-  background-color: var(--secondary-color, #28a745); /* Cor do botão de busca */
-  color: var(--text-color, #fff);
+  background: transparent;
   border: none;
-  border-radius: 0 4px 4px 0;
+  color: white;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 
-.search-btn i {
-  font-size: 1.2rem;
+.search-btn:hover {
+  color: #ccc;
 }
 
-.search-btn:hover {
-  background-color: #6700CC; /* Cor de hover no botão */
-}
 
 /* Ícones do Cabeçalho */
 .icons-container {

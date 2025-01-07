@@ -263,4 +263,26 @@
       height: 84px;
     }
   }
+  /* Responsividade */
+@media (max-width: 768px) {
+    .video-section-gallery {
+      max-width: 800px; /* Ajuste para acomodar menos vídeos */
+    }
   
+    .video-card {
+      width: 200px;
+      height: 112px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .video-section-gallery {
+      max-width: 100%;
+      justify-content: center;
+    }
+  
+    .video-card {
+      width: 150px;
+      height: 84px;
+    }
+  }

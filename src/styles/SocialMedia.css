@@ -23,7 +23,7 @@
   
   .redes__icone {
     font-size: 2rem; /* Tamanho dos ícones */
-    color: var(--primary-color, #ffff); /* Cor primária */
+    color: var(--primary-color, #E50914); /* Cor primária */
     transition: color 0.3s ease;
   }
   

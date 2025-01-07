@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faHome, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Header({ onAddVideo }) {
+  const [isSearchOpen, setSearchOpen] = useState(false); // Estado para controlar a abertura da busca
+
+  const handleSearchClick = () => {
+    setSearchOpen(true); // Expande a busca
+  };
+
+  const handleSearchBlur = () => {
+    setTimeout(() => setSearchOpen(false), 200); // Retrai a busca após pequena espera
+  };
+
   return (
     <header>
       <div className="header-content">
@@ -14,9 +24,14 @@ function Header({ onAddVideo }) {
         </div>
 
         {/* Barra de Pesquisa */}
-        <div className="search-container">
-          <input type="text" className="search-input" placeholder="Buscar vídeos..." />
-          <button className="search-btn">
+        <div className={`search-container ${isSearchOpen ? "search-open" : ""}`}>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Buscar vídeos..."
+            onBlur={handleSearchBlur} // Fecha ao clicar fora
+          />
+          <button className="search-btn" onClick={handleSearchClick}>
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
