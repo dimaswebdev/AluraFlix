@@ -61,7 +61,14 @@
     margin: 2px auto;
     padding: 10px 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+        
 }
+
+
 
 /* Título da Seção */
 .video-section-title {
@@ -69,6 +76,8 @@
     color: #fff;
     margin-bottom: 10px;
     padding-left: 15px;
+    
+    
 }
 
 /* Controles de navegação */
@@ -304,6 +313,12 @@
 .video-card-content .buttons button:hover {
     background-color: #f40612;
 }
+
+/* Espaço antes do rodapé */
+.spacer {
+    height: 300px;
+    width: 100%;
+  }
 
 /* Responsividade */
 @media (max-width: 768px) {

@@ -6,11 +6,12 @@ import Popup from "../components/Popup";
 import Footer from "../components/Footer";
 import SocialMedia from "../components/SocialMedia";
 
-import "../styles/Home.css"; // Importa o estilo adicional
+import "../styles/Home.css";
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
+  // Dados das seções de vídeos
   const videoSections = [
     {
       id: 1,
@@ -34,6 +35,7 @@ function Home() {
     },
   ];
 
+  // Refs para controle das seções
   const sectionRefs = useRef([]);
 
   const addVideo = (video) => {
@@ -66,28 +68,30 @@ function Home() {
       <main>
         {videoSections.map((section, index) => (
           <section key={section.id} className="video-section">
-            <h2 className="video-section-title">{section.title}</h2>
-            <div className="video-section-controls">
-              <button
-                className="scroll-button left"
-                onClick={() => scrollSection(sectionRefs.current[index], "left")}
-              >
-                &lt;
-              </button>
-              <div
-                className="video-section-gallery"
-                ref={(el) => (sectionRefs.current[index] = el)}
-              >
-                {section.videos.slice(0, 4).map((video, videoIndex) => (
-                  <VideoCard key={videoIndex} title="" thumbnail={video.thumbnail} />
-                ))}
+            <div className="video-section-header">
+              <h2 className="video-section-title">{section.title}</h2>
+              <div className="video-section-controls">
+                <button
+                  className="scroll-button left"
+                  onClick={() => scrollSection(sectionRefs.current[index], "left")}
+                >
+                  &lt;
+                </button>
+                <button
+                  className="scroll-button right"
+                  onClick={() => scrollSection(sectionRefs.current[index], "right")}
+                >
+                  &gt;
+                </button>
               </div>
-              <button
-                className="scroll-button right"
-                onClick={() => scrollSection(sectionRefs.current[index], "right")}
-              >
-                &gt;
-              </button>
+            </div>
+            <div
+              className="video-section-gallery"
+              ref={(el) => (sectionRefs.current[index] = el)}
+            >
+              {section.videos.slice(0, 4).map((video, videoIndex) => (
+                <VideoCard key={videoIndex} title="" thumbnail={video.thumbnail} />
+              ))}
             </div>
           </section>
         ))}
@@ -103,7 +107,8 @@ function Home() {
       {/* Redes sociais fixas */}
       <SocialMedia />
 
-      <div className="spacer"></div> {/* Espaço antes do footer */}
+      {/* Espaço antes do rodapé */}
+      <div className="spacer"></div>
 
       {/* Rodapé */}
       <Footer />
