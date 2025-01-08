@@ -16,22 +16,30 @@ function Home() {
     {
       id: 1,
       title: "Recomendados para Você",
-      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({
+        thumbnail: "https://via.placeholder.com/260x146",
+      }),
     },
     {
       id: 2,
       title: "Tendências",
-      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({
+        thumbnail: "https://via.placeholder.com/260x146",
+      }),
     },
     {
       id: 3,
       title: "Novidades",
-      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({
+        thumbnail: "https://via.placeholder.com/260x146",
+      }),
     },
     {
       id: 4,
       title: "Continue Assistindo",
-      videos: Array(10).fill({ thumbnail: "https://via.placeholder.com/260x146" }),
+      videos: Array(10).fill({
+        thumbnail: "https://via.placeholder.com/260x146",
+      }),
     },
   ];
 
@@ -73,13 +81,17 @@ function Home() {
               <div className="video-section-controls">
                 <button
                   className="scroll-button left"
-                  onClick={() => scrollSection(sectionRefs.current[index], "left")}
+                  onClick={() =>
+                    scrollSection(sectionRefs.current[index], "left")
+                  }
                 >
                   &lt;
                 </button>
                 <button
                   className="scroll-button right"
-                  onClick={() => scrollSection(sectionRefs.current[index], "right")}
+                  onClick={() =>
+                    scrollSection(sectionRefs.current[index], "right")
+                  }
                 >
                   &gt;
                 </button>
@@ -90,7 +102,11 @@ function Home() {
               ref={(el) => (sectionRefs.current[index] = el)}
             >
               {section.videos.slice(0, 4).map((video, videoIndex) => (
-                <VideoCard key={videoIndex} title="" thumbnail={video.thumbnail} />
+                <VideoCard
+                  key={videoIndex}
+                  title=""
+                  thumbnail={video.thumbnail}
+                />
               ))}
             </div>
           </section>
