@@ -24,7 +24,11 @@ function Carousel() {
 
   return (
     <section className="carousel">
-      <Swiper slidesPerView={1} spaceBetween={10} pagination={{ clickable: true }}>
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={10}
+        pagination={{ clickable: true }}
+      >
         {videos.map((video, index) => (
           <SwiperSlide key={index}>
             <div className="carousel-slide">
