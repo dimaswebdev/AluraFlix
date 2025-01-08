@@ -58,14 +58,14 @@
 .video-section {
     width: 100%;
     max-width: 1364px;
-    margin: 20px auto;
+    margin: 2px auto;
     padding: 10px 0;
     position: relative;
 }
 
 /* Título da Seção */
 .video-section-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #fff;
     margin-bottom: 10px;
     padding-left: 15px;
@@ -79,7 +79,7 @@
     justify-content: center;
 }
 
-/* Galeria de vídeos */
+
 /* Galeria de vídeos */
 .video-section-gallery {
     display: flex;
