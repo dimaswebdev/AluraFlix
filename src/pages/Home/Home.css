@@ -54,24 +54,31 @@
   margin: 20px 0;
 }
 
-/* Seção de Vídeos */
 .video-section {
   width: 100%;
   max-width: 1364px;
-  margin: 2px auto;
-  padding: 10px 0;
+  margin: 20px auto;
+  padding: 0;
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Alinha os elementos ao início (esquerda) */
+  text-align: left;
 }
 
-/* Título da Seção */
-.video-section-title {
-  font-size: 1.2rem;
-  color: #fff;
+.video-section-header {
   margin-bottom: 10px;
-  padding-left: 15px;
+  text-align: left; /* Alinha todo o cabeçalho à esquerda */
+  width: 100%; /* Garante que o título ocupe toda a largura */
+}
+
+.video-section-title {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 5px;
+  margin-left: 125px;
+  padding: 0;
+  text-align: left; /* Alinha explicitamente o texto do título */
 }
 
 /* Controles de navegação */
@@ -216,21 +223,21 @@
   height: 40px;
   font-size: 1.5rem;
   cursor: pointer;
-  z-index: 2;
+  z-index: 10;
 }
 
 .scroll-button.left {
   position: absolute;
-  left: -50px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: -620px; /* Reposiciona mais próximo da extremidade */
+  top: 150%;
+  transform: translateY(150%);
 }
 
 .scroll-button.right {
   position: absolute;
-  right: 90px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: -620px; /* Reposiciona mais próximo da extremidade */
+  top: 150%;
+  transform: translateY(150%);
 }
 
 /* Estilo dos cards de vídeo */

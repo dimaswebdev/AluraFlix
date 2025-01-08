@@ -76,27 +76,32 @@ function Home() {
       <main>
         {videoSections.map((section, index) => (
           <section key={section.id} className="video-section">
+            {/* Cabeçalho da Seção */}
             <div className="video-section-header">
               <h2 className="video-section-title">{section.title}</h2>
-              <div className="video-section-controls">
-                <button
-                  className="scroll-button left"
-                  onClick={() =>
-                    scrollSection(sectionRefs.current[index], "left")
-                  }
-                >
-                  &lt;
-                </button>
-                <button
-                  className="scroll-button right"
-                  onClick={() =>
-                    scrollSection(sectionRefs.current[index], "right")
-                  }
-                >
-                  &gt;
-                </button>
-              </div>
             </div>
+
+            {/* Controles de Navegação */}
+            <div className="video-section-controls">
+              <button
+                className="scroll-button left"
+                onClick={() =>
+                  scrollSection(sectionRefs.current[index], "left")
+                }
+              >
+                &lt;
+              </button>
+              <button
+                className="scroll-button right"
+                onClick={() =>
+                  scrollSection(sectionRefs.current[index], "right")
+                }
+              >
+                &gt;
+              </button>
+            </div>
+
+            {/* Galeria de Vídeos */}
             <div
               className="video-section-gallery"
               ref={(el) => (sectionRefs.current[index] = el)}
