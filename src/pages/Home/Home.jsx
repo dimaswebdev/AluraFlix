@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
-import Header from "../components/Header";
-import Carousel from "../components/Carousel";
-import VideoCard from "../components/VideoCard";
-import Popup from "../components/Popup";
-import Footer from "../components/Footer";
-import SocialMedia from "../components/SocialMedia";
+import Header from "../../components/Header";
+import Carousel from "../../components/Carousel";
+import VideoCard from "../../components/VideoCard";
+import Popup from "../../components/Popup";
+import Footer from "../../components/Footer";
+import SocialMedia from "../../components/SocialMedia";
 
-import "../styles/Home.css";
+import "./Home.css";
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "../styles/Carousel.css"; // Certifique-se de importar o CSS
+import "./Carousel.css"; // Certifique-se de importar o CSS
 
 function Carousel() {
   const videos = [

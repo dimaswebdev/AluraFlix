@@ -7,7 +7,7 @@ import {
   faThumbsDown,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
-import "../styles/VideoCard.css";
+import "./VideoCard.css";
 
 function VideoCard({ title, thumbnail, match, age, season, quality, genres }) {
   return (

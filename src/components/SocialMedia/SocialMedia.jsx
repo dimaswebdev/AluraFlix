@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/SocialMedia.css"; // Importe o CSS criado
+import "./SocialMedia.css"; // Importe o CSS criado
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 

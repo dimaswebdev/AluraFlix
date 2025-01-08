@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/Popup.css";
+import "./Popup.css";
 
 function Popup({ isOpen, onClose, onAdd }) {
   const [url, setUrl] = useState("");
