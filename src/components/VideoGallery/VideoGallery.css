@@ -1,93 +1,145 @@
-.video-gallery {
+/* ===== Container Geral ===== */
+.slider-container {
   margin: 20px auto;
   padding: 20px;
-  max-width: 1200px;
-  border-radius: 0px;
-  color: #fff;
-  z-index: 1000;
+  max-width: 1200px; /* Largura máxima da galeria */
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto translúcido */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
 }
 
-.video-gallery .section-title {
-  font-size: 24px;
+/* ===== Slides ===== */
+.slick-slide {
+  padding: 10px;
   text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.video-slide {
-  padding: 0;
-  text-align: center;
+.slick-slide:hover {
+  transform: scale(1.05); /* Zoom suave ao passar o mouse */
+  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.3); /* Sombra adicional */
 }
 
-.video-thumbnail img {
-  width: 329px;
-  height: 160px;
-  object-fit: cover;
+/* ===== Estilo dos Vídeos ===== */
+.slick-slide iframe {
+  width: 100%; /* Largura completa do slide */
+  height: 220px; /* Altura padrão para o vídeo */
+  border-radius: 8px; /* Bordas arredondadas */
+  border: none; /* Remove bordas externas */
+  background-color: #000; /* Fundo preto enquanto carrega */
+  transition: opacity 0.3s ease;
 }
 
-.video-info {
+.slick-slide iframe:hover {
+  opacity: 0.9; /* Leve transparência ao passar o mouse */
+}
+
+/* ===== Título dos Slides ===== */
+.slick-slide h3 {
   margin-top: 10px;
-}
-
-.video-info h3 {
-  font-size: 18px;
+  font-size: 16px;
+  color: #fff;
+  text-transform: capitalize; /* Primeira letra de cada palavra em maiúscula */
   font-weight: bold;
-  margin: 5px 0;
+  letter-spacing: 0.5px;
 }
 
-.video-info p {
-  font-size: 14px;
-  color: #bbb;
+/* ===== Botões do Slick ===== */
+.slick-arrow {
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo preto translúcido */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  z-index: 2;
 }
 
-/* ===== Estilo do Carrossel (react-slick) ===== */
-.video-gallery-slider .slick-slider {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  user-select: none;
-  touch-action: pan-y;
-  -webkit-tap-highlight-color: transparent;
+.slick-arrow:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Fundo claro ao passar o mouse */
 }
 
-.video-gallery-slider .slick-slide {
-  display: block;
-  padding: 0;
+.slick-arrow::before {
+  font-size: 20px;
+  color: #fff; /* Cor branca padrão */
 }
 
-.video-gallery-slider .slick-slide img {
-  width: 100%;
-  border-radius: 8px;
-  object-fit: cover;
+.slick-prev {
+  left: -50px; /* Ajuste de posição para fora da galeria */
+}
+
+.slick-next {
+  right: -50px; /* Ajuste de posição para fora da galeria */
+}
+
+/* ===== Dots (Indicadores) ===== */
+.slick-dots {
+  bottom: -30px; /* Ajusta a posição */
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #fff; /* Cor branca para os pontos */
+  opacity: 0.6;
+}
+
+.slick-dots li.slick-active button:before {
+  color: red; /* Cor vermelha para o ponto ativo */
+  opacity: 1;
 }
 
 /* ===== Responsividade ===== */
 @media (max-width: 768px) {
-  .video-gallery {
+  .slider-container {
     padding: 15px;
   }
 
-  .video-gallery .section-title {
-    font-size: 20px;
+  .slick-slide iframe {
+    height: 180px; /* Reduz a altura do vídeo em dispositivos menores */
   }
 
-  .video-thumbnail img {
-    max-height: 150px;
-    height: auto;
+  .slick-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .slick-prev {
+    left: -35px;
+  }
+
+  .slick-next {
+    right: -35px;
   }
 }
 
 @media (max-width: 480px) {
-  .video-gallery {
+  .slider-container {
     padding: 10px;
   }
 
-  .video-gallery .section-title {
-    font-size: 18px;
+  .slick-slide iframe {
+    height: 150px; /* Reduz ainda mais a altura em telas pequenas */
   }
 
-  .video-thumbnail img {
-    max-height: 100px;
-    height: auto;
+  .slick-arrow {
+    width: 25px;
+    height: 25px;
+  }
+
+  .slick-arrow::before {
+    font-size: 16px;
+  }
+
+  .slick-prev {
+    left: -25px;
+  }
+
+  .slick-next {
+    right: -25px;
   }
 }

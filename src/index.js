@@ -1,13 +1,12 @@
-// ===== Importações =====
-// Estilos do React Slick
+// ===== Importação de estilos externos =====
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Bibliotecas externas
+// ===== Importação de bibliotecas externas =====
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// Arquivos internos
+// ===== Importação de arquivos internos =====
 import "./index.css"; // Estilos globais
 import App from "./App";
 
@@ -17,10 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
-// ===== Medições de Performance =====
-// Para habilitar medições, descomente o código abaixo
+// ===== Medições de performance (opcional) =====
 // import reportWebVitals from "./reportWebVitals";
 // reportWebVitals(console.log);

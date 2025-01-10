@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Carousel from "../../components/Carousel";
-
 import Popup from "../../components/Popup";
 import Footer from "../../components/Footer";
 import SocialMedia from "../../components/SocialMedia";

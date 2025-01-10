@@ -1,6 +1,13 @@
 /* Importação do Swiper CSS - pode ser removido se não utilizado */
 @import "swiper/css";
 
+/* Estilos globais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Garante que padding e border não expandam o tamanho dos elementos */
+}
+
 /* Estilo global para o body */
 body {
   margin: 0;
@@ -10,10 +17,69 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f9f9f9; /* Fundo neutro */
+  color: #333; /* Cor do texto padrão */
+  line-height: 1.6; /* Melhor espaçamento entre linhas */
+}
+
+/* Estilo para links */
+a {
+  text-decoration: none;
+  color: inherit; /* Herdar cor do texto */
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #007bff; /* Azul padrão para hover */
+}
+
+/* Estilo para cabeçalhos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 15px; /* Margem inferior padrão */
+  font-weight: bold;
+}
+
+/* Estilo para listas */
+ul {
+  list-style: none; /* Remove bullets das listas */
+  padding: 0;
 }
 
 /* Estilo para código (apenas se necessário) */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  background-color: #f4f4f4; /* Fundo sutil */
+  padding: 2px 4px; /* Espaçamento interno */
+  border-radius: 4px; /* Borda arredondada */
+}
+
+/* Estilo para botões */
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  /* background-color: #007bff; */
+  color: white;
+  transform: scale(1.05); /* Leve efeito de crescimento */
+}
+
+/* Layout responsivo básico */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Ajuste do tamanho da fonte em dispositivos menores */
+  }
 }
