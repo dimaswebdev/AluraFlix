@@ -22,14 +22,17 @@ function Header({ onAddVideo }) {
       setShowTooltip(true);
       setTimeout(() => setShowTooltip(false), 3000);
     } else {
-      // Realizando busca
+      console.log("Busca válida:", searchQuery);
     }
   };
 
-  const handleSearchBlur = () => {
-    setSearchOpen(false);
-    setSearchQuery("");
-    setShowTooltip(false);
+  const handleSearchBlur = (e) => {
+    // Verifica se o clique foi fora do campo de pesquisa
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setSearchOpen(false);
+      setSearchQuery("");
+      setShowTooltip(false);
+    }
   };
 
   const handleInputChange = (event) => {
@@ -39,8 +42,8 @@ function Header({ onAddVideo }) {
 
   const isValidSearch = (query) => {
     const validTitles = ["Aluraflix", "React", "Vídeos"];
-    return validTitles.some(
-      (title) => title.toLowerCase() === query.toLowerCase()
+    return validTitles.some((title) =>
+      title.toLowerCase().includes(query.toLowerCase())
     );
   };
 
@@ -53,8 +56,11 @@ function Header({ onAddVideo }) {
         </div>
 
         <div className="icons-container">
+          {/* Barra de Pesquisa */}
           <div
             className={`search-container ${isSearchOpen ? "search-open" : ""}`}
+            onBlur={handleSearchBlur} // Detecta clique fora
+            tabIndex="-1" // Necessário para o evento Blur funcionar corretamente
           >
             <input
               type="text"
@@ -63,7 +69,6 @@ function Header({ onAddVideo }) {
               placeholder="Buscar vídeos..."
               value={searchQuery}
               onChange={handleInputChange}
-              onBlur={handleSearchBlur}
             />
             <button className="search-btn" onClick={handleSearchClick}>
               <FontAwesomeIcon icon={faSearch} />

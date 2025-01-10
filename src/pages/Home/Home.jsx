@@ -1,66 +1,145 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Carousel from "../../components/Carousel";
-import VideoCard from "../../components/VideoCard";
+
 import Popup from "../../components/Popup";
 import Footer from "../../components/Footer";
 import SocialMedia from "../../components/SocialMedia";
+import VideoGallery from "../../components/VideoGallery";
 
 import "./Home.css";
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [videos, setVideos] = useState(() => {
+    // Recupera vídeos do localStorage
+    const savedVideos = localStorage.getItem("videos");
+    return savedVideos
+      ? JSON.parse(savedVideos)
+      : [
+          {
+            thumbnail: "https://via.placeholder.com/260x146",
+            videoTitle: "Título do Vídeo 1",
+            description: "Descrição do vídeo 1",
+            details: "1 Temporada • HD • Ação",
+          },
+          {
+            thumbnail: "https://via.placeholder.com/260x146",
+            videoTitle: "Título do Vídeo 2",
+            description: "Descrição do vídeo 2",
+            details: "2 Temporadas • 4K • Drama",
+          },
+        ];
+  });
 
-  // Dados das seções de vídeos
+  useEffect(() => {
+    // Salva os vídeos no localStorage
+    localStorage.setItem("videos", JSON.stringify(videos));
+  }, [videos]);
+
+  const addVideo = (video) => {
+    setVideos((prevVideos) => [...prevVideos, video]);
+  };
+
+  // Dados para cada seção
   const videoSections = [
     {
-      id: 1,
-      title: "Recomendados para Você",
-      videos: Array(10).fill({
-        thumbnail: "https://via.placeholder.com/260x146",
-      }),
+      title: "Recommended for You",
+      videos: [
+        {
+          title: "Video 1",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "95%",
+          age: "16",
+          season: "1 Season",
+          quality: "HD",
+          genres: "Drama • Action",
+        },
+        {
+          title: "Video 2",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "90%",
+          age: "12",
+          season: "2 Seasons",
+          quality: "4K",
+          genres: "Comedy • Romance",
+        },
+      ],
     },
     {
-      id: 2,
-      title: "Tendências",
-      videos: Array(10).fill({
-        thumbnail: "https://via.placeholder.com/260x146",
-      }),
+      title: "New Releases",
+      videos: [
+        {
+          title: "Video 3",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "89%",
+          age: "18",
+          season: "3 Seasons",
+          quality: "HD",
+          genres: "Horror • Thriller",
+        },
+        {
+          title: "Video 4",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "92%",
+          age: "10",
+          season: "4 Seasons",
+          quality: "HD",
+          genres: "Adventure • Animation",
+        },
+      ],
     },
     {
-      id: 3,
-      title: "Novidades",
-      videos: Array(10).fill({
-        thumbnail: "https://via.placeholder.com/260x146",
-      }),
+      title: "Trending Now",
+      videos: [
+        {
+          title: "Video 5",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "87%",
+          age: "16",
+          season: "1 Season",
+          quality: "HD",
+          genres: "Science Fiction • Fantasy",
+        },
+        {
+          title: "Video 6",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "91%",
+          age: "18",
+          season: "2 Seasons",
+          quality: "HD",
+          genres: "Adventure • Comedy",
+        },
+      ],
     },
     {
-      id: 4,
-      title: "Continue Assistindo",
-      videos: Array(10).fill({
-        thumbnail: "https://via.placeholder.com/260x146",
-      }),
+      title: "Top Rated",
+      videos: [
+        {
+          title: "Video 7",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "93%",
+          age: "12",
+          season: "1 Season",
+          quality: "4K",
+          genres: "Drama • Biography",
+        },
+        {
+          title: "Video 8",
+          thumbnail: "https://via.placeholder.com/300",
+          match: "88%",
+          age: "14",
+          season: "3 Seasons",
+          quality: "HD",
+          genres: "Romance • Mystery",
+        },
+      ],
     },
   ];
 
-  // Refs para controle das seções
-  const sectionRefs = useRef([]);
-
-  const addVideo = (video) => {
-    console.log("Vídeo adicionado:", video);
-    setPopupOpen(false);
-  };
-
-  const scrollSection = (ref, direction) => {
-    if (ref) {
-      const scrollAmount = direction === "left" ? -300 : 300;
-      ref.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
   return (
     <div className="home">
-      {/* Fundo com imagem e gradiente */}
+      {/* Fundo com gradiente */}
       <div className="background-container">
         <div className="background-image"></div>
         <div className="background-gradient"></div>
@@ -72,60 +151,25 @@ function Home() {
       {/* Carrossel */}
       <Carousel />
 
-      {/* Conteúdo principal */}
+      {/* Seções de vídeos usando VideoGallery */}
       <main>
         {videoSections.map((section, index) => (
-          <section key={section.id} className="video-section">
-            {/* Cabeçalho da Seção */}
-            <div className="video-section-header">
-              <h2 className="video-section-title">{section.title}</h2>
-            </div>
-
-            {/* Controles de Navegação */}
-            <div className="video-section-controls">
-              <button
-                className="scroll-button left"
-                onClick={() =>
-                  scrollSection(sectionRefs.current[index], "left")
-                }
-              >
-                &lt;
-              </button>
-              <button
-                className="scroll-button right"
-                onClick={() =>
-                  scrollSection(sectionRefs.current[index], "right")
-                }
-              >
-                &gt;
-              </button>
-            </div>
-
-            {/* Galeria de Vídeos */}
-            <div
-              className="video-section-gallery"
-              ref={(el) => (sectionRefs.current[index] = el)}
-            >
-              {section.videos.slice(0, 4).map((video, videoIndex) => (
-                <VideoCard
-                  key={videoIndex}
-                  title=""
-                  thumbnail={video.thumbnail}
-                />
-              ))}
-            </div>
-          </section>
+          <VideoGallery
+            key={index}
+            videos={section.videos}
+            sectionTitle={section.title}
+          />
         ))}
       </main>
 
-      {/* Popup para adicionar vídeo */}
+      {/* Popup */}
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setPopupOpen(false)}
         onAdd={addVideo}
       />
 
-      {/* Redes sociais fixas */}
+      {/* Redes Sociais */}
       <SocialMedia />
 
       {/* Espaço antes do rodapé */}

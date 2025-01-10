@@ -1,17 +1,4 @@
-/* Fundo gradiente da Home */
-.home-background {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  margin: 0;
-  background: linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, #141414 100%);
-  opacity: 1;
-  z-index: -1;
-}
-
-/* Contêiner para a imagem e gradiente */
+/* ===== Fundo Gradiente da Home ===== */
 .background-container {
   position: fixed;
   top: 0;
@@ -22,225 +9,50 @@
   overflow: hidden;
 }
 
-/* Imagem de fundo */
 .background-image {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/public/img/imagem - 01.png");
+  background-image: url("/public/img/imagem\ -\ 01.png");
   background-size: cover;
   background-position: center;
   filter: brightness(0.6);
 }
 
-/* Gradiente */
 .background-gradient {
   position: absolute;
   top: 35%;
-  left: 0;
   width: 100%;
   height: 100%;
   background-image: url("/public/img/BG-Fade.png");
   opacity: 1;
 }
 
-/* Título principal */
-.main-title {
-  font-size: 2rem;
-  text-align: center;
-  color: #fff;
-  margin: 20px 0;
-}
-
+/* ===== Seções de Vídeos ===== */
 .video-section {
   width: 100%;
   max-width: 1364px;
   margin: 20px auto;
-  padding: 0;
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Alinha os elementos ao início (esquerda) */
-  text-align: left;
-}
-
-.video-section-header {
-  margin-bottom: 10px;
-  text-align: left; /* Alinha todo o cabeçalho à esquerda */
-  width: 100%; /* Garante que o título ocupe toda a largura */
 }
 
 .video-section-title {
   font-size: 1.5rem;
   color: #fff;
-  margin: 5px;
-  margin-left: 125px;
-  padding: 0;
-  text-align: left; /* Alinha explicitamente o texto do título */
+  margin: 10px 0;
+  padding-left: 10%;
 }
 
-/* Controles de navegação */
-.video-section-controls {
-  display: flex;
-  align-items: center;
-  position: relative;
-  justify-content: center;
-}
-
-/* Galeria de vídeos */
 .video-section-gallery {
   display: flex;
   gap: 10px;
-  overflow: visible; /* Permite que o conteúdo do hover ultrapasse os limites */
+  overflow-x: auto;
   scroll-behavior: smooth;
-  width: 100%;
-  max-width: 1040px;
-  justify-content: center;
-  position: relative; /* Necessário para manipular o z-index */
+  padding: 10px 0;
 }
 
-/* Card básico */
-.video-card {
-  width: 260px;
-  height: 146px;
-  background-color: #333;
-  border-radius: 4px;
-  overflow: visible; /* Permite que o zoom não seja cortado */
-  flex-shrink: 0;
-  position: relative; /* Para aplicar z-index */
-  transition:
-    transform 0.3s ease-in-out,
-    z-index 0.3s ease-in-out;
-}
-
-.video-card:hover {
-  transform: scale(1.2); /* Aumenta ligeiramente o tamanho do card no hover */
-  z-index: 10; /* Garante que o card fique acima de outros elementos */
-}
-
-/* Imagem inicial do card */
-.video-thumbnail {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.video-card:hover .video-thumbnail {
-  opacity: 0.7; /* Reduz a opacidade no hover */
-}
-
-/* Conteúdo expandido no hover */
-.video-card-expanded {
-  position: absolute;
-  bottom: 0; /* Fixa a expansão na parte inferior do card */
-  left: 0; /* Mantém alinhado com o card original */
-  width: 100%; /* Ocupa toda a largura do card */
-  height: 120px; /* Define uma altura menor */
-  background: rgba(0, 0, 0, 0.9); /* Fundo escuro */
-  border-radius: 0px; /* Remove bordas arredondadas */
-  display: flex; /* Usado para alinhar o conteúdo interno */
-  flex-direction: column; /* Alinha os elementos verticalmente */
-  justify-content: space-between; /* Distribui o espaço entre os elementos */
-  padding: 10px; /* Adiciona espaçamento interno */
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-  z-index: 5;
-}
-
-.video-card:hover .video-card-expanded {
-  opacity: 1;
-  transform: translateY(0); /* Revela o conteúdo ao passar o mouse */
-}
-
-/* Ícones interativos */
-.icons {
-  display: flex;
-  gap: 10px; /* Espaçamento entre os ícones */
-  align-items: center;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.icon-btn:hover {
-  transform: scale(1.2); /* Aumenta o tamanho do ícone no hover */
-}
-
-/* Detalhes do vídeo */
-.details {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.details p,
-.details span {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.match {
-  color: #46d369; /* Verde para "Match" */
-}
-
-.age {
-  padding: 2px 5px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-}
-
-.season,
-.quality {
-  color: #bbb;
-}
-
-/* Gêneros */
-.genres {
-  font-size: 0.85rem;
-  color: #bbb;
-  margin-top: 5px;
-}
-
-/* Botões de navegação */
-.scroll-button {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.scroll-button.left {
-  position: absolute;
-  left: -620px; /* Reposiciona mais próximo da extremidade */
-  top: 150%;
-  transform: translateY(150%);
-}
-
-.scroll-button.right {
-  position: absolute;
-  right: -620px; /* Reposiciona mais próximo da extremidade */
-  top: 150%;
-  transform: translateY(150%);
-}
-
-/* Estilo dos cards de vídeo */
+/* ===== Cards de Vídeos ===== */
 .video-card {
   width: 260px;
   height: 146px;
@@ -249,34 +61,32 @@
   overflow: hidden;
   flex-shrink: 0;
   position: relative;
-  transition: transform 0.3s ease-in-out; /* Animação suave para hover */
+  transition: transform 0.3s ease-in-out;
 }
 
 .video-card:hover {
-  transform: scale(1.1); /* Aumenta ligeiramente o tamanho do card no hover */
-  z-index: 2; /* Eleva o card acima dos vizinhos */
+  transform: scale(1.1);
+  z-index: 2;
 }
 
-/* Imagem no card */
-.video-card img {
+.video-thumbnail {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.3s ease-in-out; /* Transição suave para o fade */
+  transition: opacity 0.3s ease-in-out;
 }
 
-.video-card:hover img {
-  opacity: 0.7; /* Reduz a opacidade no hover */
+.video-card:hover .video-thumbnail {
+  opacity: 0.7;
 }
 
-/* Conteúdo expandido no hover */
 .video-card-content {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 50%;
-  background: rgba(0, 0, 0, 0.8); /* Fundo semitransparente */
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
   opacity: 0;
@@ -288,61 +98,40 @@
 
 .video-card:hover .video-card-content {
   opacity: 1;
-  transform: translateY(0); /* Revela o conteúdo ao passar o mouse */
+  transform: translateY(0);
 }
 
-/* Títulos e botões dentro do conteúdo */
 .video-card-content h4 {
   margin: 0;
   font-size: 1rem;
 }
 
-.video-card-content .buttons {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
-}
-
-.video-card-content .buttons button {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.video-card-content .buttons button:hover {
-  background-color: #f40612;
-}
-
-/* Espaço antes do rodapé */
+/* ===== Redes Sociais e Espaço antes do Rodapé ===== */
 .spacer {
   height: 300px;
   width: 100%;
 }
 
-/* Responsividade */
+/* ===== Responsividade ===== */
 @media (max-width: 768px) {
-  .video-section-gallery {
-    max-width: 800px;
-  }
-
   .video-card {
     width: 200px;
     height: 112px;
   }
+
+  .video-section-gallery {
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 480px) {
-  .video-section-gallery {
-    max-width: 100%;
-    justify-content: center;
-  }
-
   .video-card {
     width: 150px;
     height: 84px;
+  }
+
+  .video-section-title {
+    font-size: 1.2rem;
+    padding-left: 5%;
   }
 }

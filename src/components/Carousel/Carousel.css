@@ -1,47 +1,70 @@
 .carousel {
-    margin: 20px 0;
-  }
-  
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.carousel-slide:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-text {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.carousel-text h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-text p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-image img {
+  width: 300px;
+  height: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
   .carousel-slide {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 0px;
-    color: white;
+    flex-direction: column;
+    text-align: center;
   }
-  
+
   .carousel-text {
-    flex: 1;
-    padding-right: 20px;
+    padding-right: 0;
+    margin-bottom: 20px;
   }
-  
-  .carousel-text h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .carousel-text p {
-    font-size: 16px;
-  }
-  
+
   .carousel-image img {
-    width: 300px;
-    height: auto;
-    border-radius: 0px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 300px;
   }
-  .carousel {
-    margin: 0px 0;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5); /* Fundo com transparência */
-    border-radius: 0px; /* Bordas arredondadas */
-    color: white; /* Cor do texto */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
-    min-height: 300px; /* Altura mínima para delimitar a área */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+}
