@@ -44,7 +44,7 @@ function Home() {
   // Dados para cada seção
   const videoSections = [
     {
-      title: "Recommended for You",
+      title: "Recomendado para Você",
       videos: [
         {
           title: "Video 1",
@@ -67,7 +67,7 @@ function Home() {
       ],
     },
     {
-      title: "New Releases",
+      title: "Aprendendo React",
       videos: [
         {
           title: "Video 3",
@@ -90,7 +90,7 @@ function Home() {
       ],
     },
     {
-      title: "Trending Now",
+      title: "Aprenda JavaScript",
       videos: [
         {
           title: "Video 5",
