@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"; // Importação do PropTypes
 import Slider from "react-slick";
 import "./VideoGallery.css";
 
@@ -7,7 +8,7 @@ function VideoGallery({ videos, sectionTitle }) {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "60px",
+    centerPadding: "80px",
     slidesToShow: 3,
     speed: 500,
     responsive: [
@@ -50,5 +51,21 @@ function VideoGallery({ videos, sectionTitle }) {
     </div>
   );
 }
+
+// Adição da validação de PropTypes
+VideoGallery.propTypes = {
+  sectionTitle: PropTypes.string.isRequired, // Título da seção é obrigatório e deve ser uma string
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      thumbnail: PropTypes.string.isRequired, // URL da imagem é obrigatória
+      title: PropTypes.string.isRequired, // Título é obrigatório
+      genres: PropTypes.string, // Gêneros (opcional)
+      match: PropTypes.string, // Porcentagem de compatibilidade (opcional)
+      age: PropTypes.string, // Classificação etária (opcional)
+      season: PropTypes.string, // Temporadas (opcional)
+      quality: PropTypes.string, // Qualidade (opcional)
+    }),
+  ).isRequired, // Lista de vídeos é obrigatória
+};
 
 export default VideoGallery;

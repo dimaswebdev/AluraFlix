@@ -2,27 +2,27 @@
   margin: 20px auto;
   padding: 20px;
   max-width: 1200px;
-  /* background-color: #141414; */
   border-radius: 0px;
   color: #fff;
+  z-index: 1000;
 }
 
-.section-title {
+.video-gallery .section-title {
   font-size: 24px;
   text-align: center;
   margin-bottom: 20px;
+  color: #fff;
 }
 
 .video-slide {
-  padding: 10px;
+  padding: 0;
   text-align: center;
 }
 
 .video-thumbnail img {
-  width: 100%;
-  border-radius: 0px;
+  width: 329px;
+  height: 160px;
   object-fit: cover;
-  max-height: 200px;
 }
 
 .video-info {
@@ -40,15 +40,54 @@
   color: #bbb;
 }
 
-/* Responsividade */
+/* ===== Estilo do Carrossel (react-slick) ===== */
+.video-gallery-slider .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.video-gallery-slider .slick-slide {
+  display: block;
+  padding: 0;
+}
+
+.video-gallery-slider .slick-slide img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ===== Responsividade ===== */
 @media (max-width: 768px) {
+  .video-gallery {
+    padding: 15px;
+  }
+
+  .video-gallery .section-title {
+    font-size: 20px;
+  }
+
   .video-thumbnail img {
     max-height: 150px;
+    height: auto;
   }
 }
 
 @media (max-width: 480px) {
+  .video-gallery {
+    padding: 10px;
+  }
+
+  .video-gallery .section-title {
+    font-size: 18px;
+  }
+
   .video-thumbnail img {
     max-height: 100px;
+    height: auto;
   }
 }

@@ -1,1 +1,1 @@
-export { default } from './SocialMedia';
+export { default } from "./SocialMedia";

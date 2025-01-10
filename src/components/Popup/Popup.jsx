@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types"; // Importação de PropTypes
 import "./Popup.css";
 
 function Popup({ isOpen, onClose, onAdd }) {
@@ -64,5 +65,11 @@ function Popup({ isOpen, onClose, onAdd }) {
     </div>
   );
 }
+
+Popup.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+};
 
 export default Popup;

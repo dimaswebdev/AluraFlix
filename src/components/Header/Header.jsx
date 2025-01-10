@@ -21,8 +21,6 @@ function Header({ onAddVideo }) {
     } else if (!isValidSearch(searchQuery)) {
       setShowTooltip(true);
       setTimeout(() => setShowTooltip(false), 3000);
-    } else {
-      console.log("Busca válida:", searchQuery);
     }
   };
 
@@ -43,7 +41,7 @@ function Header({ onAddVideo }) {
   const isValidSearch = (query) => {
     const validTitles = ["Aluraflix", "React", "Vídeos"];
     return validTitles.some((title) =>
-      title.toLowerCase().includes(query.toLowerCase())
+      title.toLowerCase().includes(query.toLowerCase()),
     );
   };
 
