@@ -1,145 +1,127 @@
-/* ===== Container Geral ===== */
-.slider-container {
-  margin: 20px auto;
+/* ===== Container Principal ===== */
+.video-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  max-width: 1200px; /* Largura máxima da galeria */
-  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto translúcido */
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+  background-color: #121212; /* Fundo escuro para destaque */
+}
+
+/* ===== Container do Slider ===== */
+.slider-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== Slides ===== */
-.slick-slide {
+.video-slide {
   padding: 10px;
   text-align: center;
+}
+
+.video-slide:hover {
+  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Zoom no slide central */
+.slick-center {
+  transform: scale(1.1);
+  z-index: 2;
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease;
+    z-index 0.3s ease;
 }
 
-.slick-slide:hover {
-  transform: scale(1.05); /* Zoom suave ao passar o mouse */
-  box-shadow: 0px 6px 12px rgba(255, 255, 255, 0.3); /* Sombra adicional */
+/* ===== Vídeos ===== */
+.video-slide iframe {
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
 }
 
-/* ===== Estilo dos Vídeos ===== */
-.slick-slide iframe {
-  width: 100%; /* Largura completa do slide */
-  height: 220px; /* Altura padrão para o vídeo */
-  border-radius: 8px; /* Bordas arredondadas */
-  border: none; /* Remove bordas externas */
-  background-color: #000; /* Fundo preto enquanto carrega */
-  transition: opacity 0.3s ease;
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.slick-slide iframe:hover {
-  opacity: 0.9; /* Leve transparência ao passar o mouse */
-}
-
-/* ===== Título dos Slides ===== */
-.slick-slide h3 {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #fff;
-  text-transform: capitalize; /* Primeira letra de cada palavra em maiúscula */
-  font-weight: bold;
-  letter-spacing: 0.5px;
+.video-thumbnail:hover {
+  transform: scale(1.05);
 }
 
 /* ===== Botões do Slick ===== */
 .slick-arrow {
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo preto translúcido */
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  z-index: 2;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
 }
 
 .slick-arrow:hover {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-  ); /* Fundo claro ao passar o mouse */
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .slick-arrow::before {
   font-size: 20px;
-  color: #fff; /* Cor branca padrão */
+  color: #fff;
 }
 
 .slick-prev {
-  left: -50px; /* Ajuste de posição para fora da galeria */
+  left: -50px;
 }
 
 .slick-next {
-  right: -50px; /* Ajuste de posição para fora da galeria */
-}
-
-/* ===== Dots (Indicadores) ===== */
-.slick-dots {
-  bottom: -30px; /* Ajusta a posição */
-}
-
-.slick-dots li button:before {
-  font-size: 12px;
-  color: #fff; /* Cor branca para os pontos */
-  opacity: 0.6;
-}
-
-.slick-dots li.slick-active button:before {
-  color: red; /* Cor vermelha para o ponto ativo */
-  opacity: 1;
+  right: -50px;
 }
 
 /* ===== Responsividade ===== */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .slider-container {
-    padding: 15px;
+    padding: 10px;
   }
 
-  .slick-slide iframe {
-    height: 180px; /* Reduz a altura do vídeo em dispositivos menores */
+  .slick-prev {
+    left: -40px;
+  }
+
+  .slick-next {
+    right: -40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .video-slide iframe {
+    height: 180px;
   }
 
   .slick-arrow {
     width: 30px;
     height: 30px;
   }
-
-  .slick-prev {
-    left: -35px;
-  }
-
-  .slick-next {
-    right: -35px;
-  }
 }
 
 @media (max-width: 480px) {
-  .slider-container {
-    padding: 10px;
-  }
-
-  .slick-slide iframe {
-    height: 150px; /* Reduz ainda mais a altura em telas pequenas */
-  }
-
-  .slick-arrow {
-    width: 25px;
-    height: 25px;
-  }
-
-  .slick-arrow::before {
-    font-size: 16px;
+  .video-slide iframe {
+    height: 150px;
   }
 
   .slick-prev {
-    left: -25px;
+    left: -30px;
   }
 
   .slick-next {
-    right: -25px;
+    right: -30px;
   }
 }
