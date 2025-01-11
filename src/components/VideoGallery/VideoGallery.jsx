@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "./VideoGallery.css";
 
 function CenterMode() {
+  const [playingVideos, setPlayingVideos] = useState(
+    Array(6).fill(false) // Inicializa todos os vídeos como "não reproduzindo"
+  );
+
   const settings = {
     className: "center",
     centerMode: true,
@@ -49,15 +53,24 @@ function CenterMode() {
     },
   ];
 
-  const [playingVideos, setPlayingVideos] = useState(
-    sections[0].videos.map(() => false)
-  );
-
   const handlePlayVideo = (index) => {
-    setPlayingVideos((prevState) =>
-      prevState.map((isPlaying, i) => (i === index ? true : isPlaying))
+    setPlayingVideos(
+      (prevState) => prevState.map((_, i) => i === index) // Define "true" apenas para o índice clicado
     );
   };
+
+  const handleClickOutside = () => {
+    setPlayingVideos(Array(6).fill(false)); // Reseta todos os vídeos para thumbnails
+  };
+
+  useEffect(() => {
+    // Adiciona o listener para cliques em qualquer área da tela
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Remove o listener ao desmontar o componente
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="video-gallery">
