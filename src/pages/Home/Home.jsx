@@ -5,176 +5,92 @@ import Popup from "../../components/Popup";
 import Footer from "../../components/Footer";
 import SocialMedia from "../../components/SocialMedia";
 import VideoGallery from "../../components/VideoGallery";
-
 import "./Home.css";
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
-  const [videos, setVideos] = useState(() => {
-    // Recupera vídeos do localStorage
-    const savedVideos = localStorage.getItem("videos");
-    return savedVideos
-      ? JSON.parse(savedVideos)
+
+  // Inicializa o estado de sections a partir do localStorage
+  const [sections, setSections] = useState(() => {
+    const savedSections = localStorage.getItem("videoSections");
+    return savedSections
+      ? JSON.parse(savedSections)
       : [
-          {
-            thumbnail: "https://via.placeholder.com/260x146",
-            videoTitle: "Título do Vídeo 1",
-            description: "Descrição do vídeo 1",
-            details: "1 Temporada • HD • Ação",
-          },
-          {
-            thumbnail: "https://via.placeholder.com/260x146",
-            videoTitle: "Título do Vídeo 2",
-            description: "Descrição do vídeo 2",
-            details: "2 Temporadas • 4K • Drama",
-          },
+          { id: 1, title: "Recomendado para Você", videos: [] },
+          { id: 2, title: "Aprendendo", videos: [] },
+          { id: 3, title: "Aprenda JavaScript", videos: [] },
+          { id: 4, title: "Top Rated", videos: [] },
         ];
   });
 
+  // Sincroniza o estado de sections com o localStorage
   useEffect(() => {
-    // Salva os vídeos no localStorage
-    localStorage.setItem("videos", JSON.stringify(videos));
-  }, [videos]);
+    localStorage.setItem("videoSections", JSON.stringify(sections));
+  }, [sections]);
 
-  const addVideo = (video) => {
-    setVideos((prevVideos) => [...prevVideos, video]);
+  // Adiciona um vídeo à seção selecionada
+  const addVideo = (video, sectionTitle) => {
+    setSections((prevSections) =>
+      prevSections.map((section) =>
+        section.title === sectionTitle
+          ? {
+              ...section,
+              videos: section.videos.some((v) => v.id === video.id)
+                ? section.videos // Não adiciona duplicatas
+                : [...section.videos, video],
+            }
+          : section
+      )
+    );
   };
 
-  // Dados para cada seção
-  const videoSections = [
-    {
-      title: "Recomendado para Você",
-      videos: [
-        {
-          title: "Video 1",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "95%",
-          age: "16",
-          season: "1 Season",
-          quality: "HD",
-          genres: "Drama • Action",
-        },
-        {
-          title: "Video 2",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "90%",
-          age: "12",
-          season: "2 Seasons",
-          quality: "4K",
-          genres: "Comedy • Romance",
-        },
-      ],
-    },
-    {
-      title: "Aprendendo React",
-      videos: [
-        {
-          title: "Video 3",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "89%",
-          age: "18",
-          season: "3 Seasons",
-          quality: "HD",
-          genres: "Horror • Thriller",
-        },
-        {
-          title: "Video 4",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "92%",
-          age: "10",
-          season: "4 Seasons",
-          quality: "HD",
-          genres: "Adventure • Animation",
-        },
-      ],
-    },
-    {
-      title: "Aprenda JavaScript",
-      videos: [
-        {
-          title: "Video 5",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "87%",
-          age: "16",
-          season: "1 Season",
-          quality: "HD",
-          genres: "Science Fiction • Fantasy",
-        },
-        {
-          title: "Video 6",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "91%",
-          age: "18",
-          season: "2 Seasons",
-          quality: "HD",
-          genres: "Adventure • Comedy",
-        },
-      ],
-    },
-    {
-      title: "Top Rated",
-      videos: [
-        {
-          title: "Video 7",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "93%",
-          age: "12",
-          season: "1 Season",
-          quality: "4K",
-          genres: "Drama • Biography",
-        },
-        {
-          title: "Video 8",
-          thumbnail: "https://via.placeholder.com/300",
-          match: "88%",
-          age: "14",
-          season: "3 Seasons",
-          quality: "HD",
-          genres: "Romance • Mystery",
-        },
-      ],
-    },
-  ];
+  // Remove um vídeo de uma seção
+  const deleteVideo = (videoId, sectionTitle) => {
+    setSections((prevSections) =>
+      prevSections.map((section) =>
+        section.title === sectionTitle
+          ? {
+              ...section,
+              videos: section.videos.filter((video) => video.id !== videoId),
+            }
+          : section
+      )
+    );
+  };
 
   return (
     <div className="home">
-      {/* Fundo com gradiente */}
       <div className="background-container">
         <div className="background-image"></div>
         <div className="background-gradient"></div>
       </div>
 
-      {/* Cabeçalho */}
       <Header onAddVideo={() => setPopupOpen(true)} />
-
-      {/* Carrossel */}
       <Carousel />
 
-      {/* Seções de vídeos usando VideoGallery */}
       <main>
-        {videoSections.map((section, index) => (
+        {sections.map((section) => (
           <VideoGallery
-            key={index}
-            videos={section.videos}
+            key={section.id}
             sectionTitle={section.title}
+            videos={section.videos}
+            onDelete={(videoId) => deleteVideo(videoId, section.title)}
           />
         ))}
       </main>
 
-      {/* Popup */}
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setPopupOpen(false)}
-        onAdd={addVideo}
+        onAdd={(video, sectionTitle) => addVideo(video, sectionTitle)}
+        sections={sections.map((section) => ({
+          id: section.id,
+          title: section.title,
+        }))}
       />
 
-      {/* Redes Sociais */}
       <SocialMedia />
-
-      {/* Espaço antes do rodapé */}
       <div className="spacer"></div>
-
-      {/* Rodapé */}
       <Footer />
     </div>
   );

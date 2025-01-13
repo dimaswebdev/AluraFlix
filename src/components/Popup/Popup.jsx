@@ -1,26 +1,47 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types"; // Importação de PropTypes
+import PropTypes from "prop-types";
 import "./Popup.css";
 
-function Popup({ isOpen, onClose, onAdd }) {
+function Popup({ isOpen, onClose, onAdd, sections }) {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [details, setDetails] = useState("");
+  const [selectedSection, setSelectedSection] = useState(
+    sections[0]?.title || ""
+  );
+
+  const extractYouTubeId = (youtubeUrl) => {
+    const regex =
+      /(?:[?&]v=|\/embed\/|\.be\/|\/v\/|\/vi\/|\/watch\?v=)([a-zA-Z0-9_-]{11})/;
+    const match = youtubeUrl.match(regex);
+    return match ? match[1] : null;
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Evita o reload da página
-    if (url && title && description && details) {
-      onAdd({ url, title, description, details });
-      setUrl(""); // Limpa os campos após adicionar
+    e.preventDefault();
+    const videoId = extractYouTubeId(url);
+    if (videoId && title && description && details && selectedSection) {
+      onAdd(
+        {
+          id: videoId,
+          url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+          title,
+          description,
+          details,
+        },
+        selectedSection // Envia o título da seção para `onAdd`
+      );
+      setUrl("");
       setTitle("");
       setDescription("");
       setDetails("");
+      setSelectedSection(sections[0]?.title || "");
     }
   };
 
   if (!isOpen) {
-    return null; // Retorna nada se o popup não estiver aberto
+    return null;
   }
 
   return (
@@ -31,9 +52,19 @@ function Popup({ isOpen, onClose, onAdd }) {
         </button>
         <h2>Adicionar Vídeo</h2>
         <form onSubmit={handleSubmit}>
+          <select
+            value={selectedSection}
+            onChange={(e) => setSelectedSection(e.target.value)}
+          >
+            {sections.map((section) => (
+              <option key={section.id} value={section.title}>
+                {section.title}
+              </option>
+            ))}
+          </select>
           <input
             type="text"
-            placeholder="URL da thumbnail do vídeo"
+            placeholder="URL do vídeo do YouTube"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
@@ -70,6 +101,12 @@ Popup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Popup;
