@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Header.css";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,27 @@ function Header({ onAddVideo }) {
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); // Novo estado para monitorar rolagem
   const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Verifica se o usuário rolou para baixo
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    // Adiciona o evento de rolagem
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      // Remove o evento ao desmontar o componente
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleSearchClick = () => {
     if (searchQuery.trim() === "") {
@@ -41,12 +61,12 @@ function Header({ onAddVideo }) {
   const isValidSearch = (query) => {
     const validTitles = ["Aluraflix", "React", "Vídeos"];
     return validTitles.some((title) =>
-      title.toLowerCase().includes(query.toLowerCase()),
+      title.toLowerCase().includes(query.toLowerCase())
     );
   };
 
   return (
-    <header>
+    <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-content">
         <div className="logo-container">
           <img src="/dimas-logo.png" alt="Logo" className="logo" />

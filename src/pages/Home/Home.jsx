@@ -16,10 +16,41 @@ function Home() {
     return savedSections
       ? JSON.parse(savedSections)
       : [
-          { id: 1, title: "Recomendado para Você", videos: [] },
-          { id: 2, title: "Aprendendo", videos: [] },
-          { id: 3, title: "Aprenda JavaScript", videos: [] },
-          { id: 4, title: "Top Rated", videos: [] },
+          {
+            id: 1,
+            title: "Recomendado para Você",
+            videos: [
+              {
+                id: "d73vYX8gsuQ",
+                title: "Título do Vídeo 1",
+                description: "Descrição do Vídeo 1",
+                videoUrl: "https://www.youtube.com/embed/d73vYX8gsuQ",
+                image: "https://img.youtube.com/vi/d73vYX8gsuQ/hqdefault.jpg",
+              },
+              {
+                id: "BHuAzUu19VQ",
+                title: "Título do Vídeo 2",
+                description: "Descrição do Vídeo 2",
+                videoUrl: "https://www.youtube.com/embed/BHuAzUu19VQ",
+                image: "https://img.youtube.com/vi/BHuAzUu19VQ/hqdefault.jpg",
+              },
+            ],
+          },
+          {
+            id: 2,
+            title: "Aprendendo",
+            videos: [],
+          },
+          {
+            id: 3,
+            title: "Aprenda JavaScript",
+            videos: [],
+          },
+          {
+            id: 4,
+            title: "Mais Vistos",
+            videos: [],
+          },
         ];
   });
 
@@ -58,6 +89,11 @@ function Home() {
     );
   };
 
+  // Obtém vídeos da primeira seção para o Carousel
+  const recommendedVideos =
+    sections.find((section) => section.title === "Recomendado para Você")
+      ?.videos || [];
+
   return (
     <div className="home">
       <div className="background-container">
@@ -66,7 +102,7 @@ function Home() {
       </div>
 
       <Header onAddVideo={() => setPopupOpen(true)} />
-      <Carousel />
+      <Carousel videos={recommendedVideos} />
 
       <main>
         {sections.map((section) => (

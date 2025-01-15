@@ -23,10 +23,10 @@
 
 .redes__icone {
   font-size: 2rem; /* Tamanho dos ícones */
-  color: var(--primary-color, #e50914); /* Cor primária */
+  color: var(--primary-color, #ffff); /* Cor primária */
   transition: color 0.3s ease;
 }
 
 .redes__icone:hover {
-  color: var(--secondary-color, #ffff); /* Cor ao passar o mouse */
+  color: var(--secondary-color, #e50914); /* Cor ao passar o mouse */
 }

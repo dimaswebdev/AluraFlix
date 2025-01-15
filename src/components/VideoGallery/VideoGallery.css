@@ -48,6 +48,11 @@
   max-height: 100%;
   border-radius: 8px;
 }
+.video-gallery .section-title {
+  align-self: flex-start; /* Alinha o título à esquerda dentro do contêiner flex */
+  text-align: left; /* Garante que o texto dentro do título esteja alinhado à esquerda */
+  margin-left: 20px; /* Opcional: Adiciona espaçamento para destacar */
+}
 
 .video-thumbnail {
   width: 100%;

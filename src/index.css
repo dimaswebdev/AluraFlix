@@ -41,6 +41,7 @@ h5,
 h6 {
   margin: 0 0 15px; /* Margem inferior padrão */
   font-weight: bold;
+  color: white;
 }
 
 /* Estilo para listas */
@@ -66,15 +67,17 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  background-color: #e50914; /* Netflix Red */
+  color: white; /* Texto em branco */
   transition:
     background-color 0.3s ease,
     transform 0.2s ease;
 }
 
 button:hover {
-  /* background-color: #007bff; */
-  color: white;
+  background-color: #b20710; /* Symbol Dark Red */
   transform: scale(1.05); /* Leve efeito de crescimento */
+  color: white; /* Mantém o texto branco no hover */
 }
 
 /* Layout responsivo básico */
