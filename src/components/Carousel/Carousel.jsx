@@ -13,20 +13,20 @@ function Carousel() {
       description:
         "Dicas e estratégias para aprender programação de maneira eficiente, focando no que realmente importa.",
       image: "https://img.youtube.com/vi/OqiuC8bdxb4/maxresdefault.jpg",
-      videoUrl: "https://www.youtube.com/watch?v=OqiuC8bdxb4",
+      videoUrl: "OqiuC8bdxb4", // Apenas o ID do vídeo
     },
     {
       title: "Como CRIAR um Canal de REACT RÁPIDO? (Passo a Passo)",
       description: "Saiba como criar e monetizar um canal de react no YouTube.",
       image: "https://img.youtube.com/vi/no1yHN5YsdA/maxresdefault.jpg",
-      videoUrl: "https://www.youtube.com/watch?v=no1yHN5YsdA",
+      videoUrl: "no1yHN5YsdA", // Apenas o ID do vídeo
     },
     {
       title:
         "Como Começar um Canal de React no YouTube em 2025? (Passo a Passo Revelado)",
       description: "Dicas para iniciar um canal de react no YouTube em 2025.",
       image: "https://img.youtube.com/vi/c-D7uV2CiFQ/maxresdefault.jpg",
-      videoUrl: "https://www.youtube.com/watch?v=c-D7uV2CiFQ",
+      videoUrl: "c-D7uV2CiFQ", // Apenas o ID do vídeo
     },
   ];
 
@@ -43,8 +43,8 @@ function Carousel() {
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
-        autoplay={{ delay: 2000, disableOnInteraction: false }} // Tempo ajustado para 2s
-        speed={2000} // Tempo de transição ajustado para 2 segundos
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        speed={2000}
         pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1 },
@@ -77,11 +77,10 @@ function Carousel() {
         <div className="modal">
           <div className="modal-content">
             <button className="close-button" onClick={closeModal}>
-              {" "}
-              X{" "}
+              X
             </button>
             <iframe
-              src={selectedVideo.videoUrl}
+              src={`https://www.youtube.com/embed/${selectedVideo.videoUrl}`} // Formato correto
               title={selectedVideo.title}
               width="100%"
               height="400px"

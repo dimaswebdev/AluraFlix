@@ -66,14 +66,14 @@ function VideoGallery({ sectionTitle, videos, onDelete }) {
             <div key={video.id} className="video-slide">
               {!playingVideos[index] ? (
                 <img
-                  src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                  src={video.image}
                   alt={video.title}
                   onClick={() => handlePlayVideo(index)}
                   className="video-thumbnail"
                 />
               ) : (
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}`}
+                  src={video.videoUrl}
                   title={video.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -99,15 +99,7 @@ function VideoGallery({ sectionTitle, videos, onDelete }) {
 
 VideoGallery.propTypes = {
   sectionTitle: PropTypes.string.isRequired,
-  videos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      details: PropTypes.string,
-    })
-  ).isRequired,
+  videos: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
