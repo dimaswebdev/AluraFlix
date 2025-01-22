@@ -27,17 +27,40 @@
   z-index: -1; /* Mantém o fundo translúcido atrás */
 }
 
-.carousel-slide h2,
-.carousel-slide p {
-  z-index: 2; /* Textos e botão ficam acima do fundo */
-  text-align: left; /* Alinha os textos à esquerda */
-  margin: 0;
-  padding: 0 10px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+.carousel-content {
+  display: flex;
+  flex-direction: column; /* Organiza os elementos em coluna */
+  justify-content: flex-start; /* Alinha os itens no topo da div */
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  max-width: 800px; /* Define uma largura máxima para a div */
+  margin: 0 auto; /* Centraliza a div horizontalmente */
+  padding: 20px; /* Adiciona espaçamento interno */
+  /*background: rgba(0, 0, 0, 0.5);  Fundo semitransparente */
+  border-radius: 10px; /* Bordas arredondadas */
+  position: relative;
+  left: -190px; /* Ajusta para mover um pouco para a esquerda */
 }
 
-.carousel-slide .watch-button {
-  margin-top: 10px;
+.carousel-title,
+.carousel-description {
+  margin: 0 0 10px 0; /* Adiciona espaçamento entre os textos */
+  text-align: left; /* Garante o alinhamento à esquerda */
+  color: white; /* Texto em branco */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* Adiciona sombra para contraste */
+}
+
+.carousel-title {
+  font-size: 24px; /* Tamanho da fonte do título */
+  font-weight: bold;
+}
+
+.carousel-description {
+  font-size: 16px; /* Tamanho da fonte da descrição */
+}
+
+.watch-button {
+  align-self: flex-start; /* Garante que o botão fique alinhado à esquerda */
+  margin-top: 10px; /* Espaçamento superior */
   padding: 10px 25px;
   background-color: #e50914; /* Netflix Red */
   border: none;
@@ -45,12 +68,11 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  z-index: 2; /* Botão acima do fundo translúcido */
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
 }
 
-.carousel-slide .watch-button:hover {
+.watch-button:hover {
   background-color: #b20710; /* Symbol Dark Red */
 }
 
@@ -99,13 +121,6 @@
   transition: transform 0.2s ease-in-out; /* Adiciona o efeito de zoom */
 }
 
-.close-button::before {
-  font-family: Arial, sans-serif; /* Fonte padrão */
-  font-size: 20px; /* Tamanho do "X" */
-  font-weight: bold;
-  line-height: 1;
-}
-
 .close-button:hover {
   transform: scale(1.1); /* Zoom no hover */
 }
@@ -120,13 +135,47 @@
     padding: 20px;
   }
 
-  .carousel-slide .watch-button {
-    font-size: 16px;
+  .carousel-content {
+    max-width: 90%; /* Ajusta a largura máxima */
+    padding: 15px; /* Reduz o padding */
+    left: 0; /* Remove deslocamento lateral */
+  }
+
+  .carousel-title {
+    font-size: 20px; /* Reduz o tamanho do título */
+  }
+
+  .carousel-description {
+    font-size: 14px; /* Reduz o tamanho da descrição */
+  }
+
+  .watch-button {
+    font-size: 16px; /* Reduz o tamanho do texto do botão */
     padding: 8px 20px;
   }
 
   .modal-content {
     width: 95%;
     max-height: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-content {
+    max-width: 95%; /* Mais estreito para telas muito pequenas */
+    padding: 10px;
+  }
+
+  .carousel-title {
+    font-size: 18px;
+  }
+
+  .carousel-description {
+    font-size: 12px;
+  }
+
+  .watch-button {
+    font-size: 14px;
+    padding: 6px 15px;
   }
 }

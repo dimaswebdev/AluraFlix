@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/autoplay"; // Estilos necessários para autoplay
 import "./Carousel.css";
 
 function Carousel() {
@@ -8,25 +9,22 @@ function Carousel() {
 
   const videos = [
     {
-      title:
-        "Como aprender programação de forma INTELIGENTE, sem perder tempo com coisas INÚTEIS",
-      description:
-        "Dicas e estratégias para aprender programação de maneira eficiente, focando no que realmente importa.",
+      title: "Como aprender programação de forma INTELIGENTE, sem perder tempo com coisas INÚTEIS",
+      description: "Dicas e estratégias para aprender programação de maneira eficiente, focando no que realmente importa.",
       image: "https://img.youtube.com/vi/OqiuC8bdxb4/maxresdefault.jpg",
-      videoUrl: "OqiuC8bdxb4", // Apenas o ID do vídeo
+      videoUrl: "OqiuC8bdxb4",
     },
     {
       title: "Como CRIAR um Canal de REACT RÁPIDO? (Passo a Passo)",
       description: "Saiba como criar e monetizar um canal de react no YouTube.",
       image: "https://img.youtube.com/vi/no1yHN5YsdA/maxresdefault.jpg",
-      videoUrl: "no1yHN5YsdA", // Apenas o ID do vídeo
+      videoUrl: "no1yHN5YsdA",
     },
     {
-      title:
-        "Como Começar um Canal de React no YouTube em 2025? (Passo a Passo Revelado)",
+      title: "Como Começar um Canal de React no YouTube em 2025? (Passo a Passo Revelado)",
       description: "Dicas para iniciar um canal de react no YouTube em 2025.",
       image: "https://img.youtube.com/vi/c-D7uV2CiFQ/maxresdefault.jpg",
-      videoUrl: "c-D7uV2CiFQ", // Apenas o ID do vídeo
+      videoUrl: "c-D7uV2CiFQ",
     },
   ];
 
@@ -43,14 +41,10 @@ function Carousel() {
       <Swiper
         slidesPerView={1}
         spaceBetween={0}
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
-        speed={2000}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        speed={1000}
+        loop={true} // Habilita o looping
         pagination={{ clickable: true }}
-        breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 1 },
-          1024: { slidesPerView: 1 },
-        }}
       >
         {videos.map((video, index) => (
           <SwiperSlide key={index}>
@@ -60,14 +54,17 @@ function Carousel() {
                 backgroundImage: `url(${video.image})`,
               }}
             >
-              <h2>{video.title}</h2>
-              <p>{video.description}</p>
-              <button
-                className="watch-button"
-                onClick={() => handleWatchClick(video)}
-              >
-                Assistir
-              </button>
+              <div className="carousel-content">
+                <h2 className="carousel-title">{video.title}</h2>
+                <p className="carousel-description">{video.description}</p>
+                <button
+                  className="watch-button"
+                  onClick={() => handleWatchClick(video)}
+                  aria-label={`Assistir ao vídeo: ${video.title}`}
+                >
+                  Assistir
+                </button>
+              </div>
             </div>
           </SwiperSlide>
         ))}
@@ -80,7 +77,7 @@ function Carousel() {
               X
             </button>
             <iframe
-              src={`https://www.youtube.com/embed/${selectedVideo.videoUrl}`} // Formato correto
+              src={`https://www.youtube.com/embed/${selectedVideo.videoUrl}`}
               title={selectedVideo.title}
               width="100%"
               height="400px"
