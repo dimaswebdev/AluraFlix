@@ -1,13 +1,23 @@
+/* CSS Variables */
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #e50914;
+  --icon-size: 2rem;
+  --gap-size: 20px;
+  --top-offset: 50px;
+  --right-offset: 40px;
+}
+
 /* Redes Sociais */
 .redes {
-  list-style: none; /* Remove pontinhos da lista */
+  list-style: none; /* Remove list bullets */
   display: flex;
-  flex-direction: column; /* Ícones empilhados na vertical */
-  gap: 20px; /* Espaço entre cada ícone */
-  position: fixed; /* Fica fixo na tela */
-  top: 50px; /* Distância do topo (ajuste como quiser) */
-  right: 40px; /* Distância da direita */
-  z-index: 1000; /* Para ficar acima de outros elementos */
+  flex-direction: column; /* Stack icons vertically */
+  gap: var(--gap-size); /* Space between icons */
+  position: fixed; /* Fixed position on screen */
+  top: var(--top-offset); /* Distance from top */
+  right: var(--right-offset); /* Distance from right */
+  z-index: 1000; /* Above other elements */
 }
 
 .redes__elemento a {
@@ -18,15 +28,15 @@
 }
 
 .redes__elemento a:hover {
-  transform: scale(1.1); /* Aumenta o ícone no hover */
+  transform: scale(1.1); /* Scale icon on hover */
 }
 
 .redes__icone {
-  font-size: 2rem; /* Tamanho dos ícones */
-  color: var(--primary-color, #ffff); /* Cor primária */
+  font-size: var(--icon-size); /* Icon size */
+  color: var(--primary-color); /* Primary color */
   transition: color 0.3s ease;
 }
 
 .redes__icone:hover {
-  color: var(--secondary-color, #e50914); /* Cor ao passar o mouse */
+  color: var(--secondary-color); /* Color on hover */
 }

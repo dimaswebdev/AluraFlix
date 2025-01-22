@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ref, onValue, set } from "firebase/database"; // Firebase
 import { database } from "../../firebase"; // Configuração do Firebase
 import Header from "../../components/Header";
@@ -11,8 +11,6 @@ import "./Home.css";
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
-
-  // Inicializa o estado de sections com as seções fixas ou dados do Firebase
   const [sections, setSections] = useState([
     {
       id: 1,
@@ -74,17 +72,17 @@ function Home() {
   }, []);
 
   // Salva as seções no Firebase
-  const saveSectionsToFirebase = (updatedSections) => {
+  const saveSectionsToFirebase = useCallback((updatedSections) => {
     const sectionsRef = ref(database, "videoSections");
     const formattedData = updatedSections.reduce((acc, section) => {
       acc[section.id] = section; // Converte o array para um objeto
       return acc;
     }, {});
     set(sectionsRef, formattedData);
-  };
+  }, []);
 
   // Adiciona um vídeo à seção selecionada
-  const addVideo = (video, sectionTitle) => {
+  const addVideo = useCallback((video, sectionTitle) => {
     const formattedVideo = {
       id: video.id, // ID único do vídeo
       title: video.title || "Sem título", // Título do vídeo
@@ -106,10 +104,10 @@ function Home() {
 
     setSections(updatedSections); // Atualiza o estado local
     saveSectionsToFirebase(updatedSections); // Sincroniza com o Firebase
-  };
+  }, [sections, saveSectionsToFirebase]);
 
   // Remove um vídeo de uma seção
-  const deleteVideo = (videoId, sectionTitle) => {
+  const deleteVideo = useCallback((videoId, sectionTitle) => {
     const updatedSections = sections.map((section) =>
       section.title === sectionTitle
         ? {
@@ -120,7 +118,7 @@ function Home() {
     );
     setSections(updatedSections);
     saveSectionsToFirebase(updatedSections);
-  };
+  }, [sections, saveSectionsToFirebase]);
 
   // Obtém vídeos da seção "Recomendado para Você" para o Carousel
   const recommendedVideos =

@@ -1,3 +1,11 @@
+/* ===== Variáveis CSS ===== */
+:root {
+  --background-image-url: url("/public/img/imagem - 01.jpg");
+  --background-gradient-url: url("/public/img/BG-Fade.png");
+  --background-brightness: 0.6;
+  --spacer-height: 150px;
+}
+
 /* ===== Fundo Gradiente da Home ===== */
 .background-container {
   position: fixed;
@@ -13,10 +21,10 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url("/public/img/imagem - 01.jpg");
+  background-image: var(--background-image-url);
   background-size: cover;
   background-position: center;
-  filter: brightness(0.6);
+  filter: brightness(var(--background-brightness));
 }
 
 .background-gradient {
@@ -24,12 +32,12 @@
   top: 35%;
   width: 100%;
   height: 100%;
-  background-image: url("/public/img/BG-Fade.png");
+  background-image: var(--background-gradient-url);
   opacity: 1;
 }
 
 /* ===== Espaço antes do rodapé ===== */
 .spacer {
-  height: 150px;
+  height: var(--spacer-height);
   width: 100%;
 }
