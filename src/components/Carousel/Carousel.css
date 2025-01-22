@@ -1,15 +1,32 @@
+/* CSS Variables */
+:root {
+  --netflix-red: #e50914;
+  --netflix-dark-red: #b20710;
+  --background-black: #181818;
+  --text-white: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.8);
+  --padding-large: 300px 20px 50px 20px;
+  --padding-medium: 20px;
+  --padding-small: 10px;
+  --font-size-large: 24px;
+  --font-size-medium: 18px;
+  --font-size-small: 16px;
+  --font-size-xsmall: 14px;
+  --font-size-xxsmall: 12px;
+}
+
 .carousel-slide {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Alinha os elementos para baixo */
-  align-items: flex-start; /* Alinha à esquerda */
+  justify-content: flex-end;
+  align-items: flex-start;
   height: 100%;
   position: relative;
-  color: white;
+  color: var(--text-white);
   background-size: cover;
   background-position: center;
-  padding: 300px 20px 50px 20px; /* Ajuste no padding-bottom para destacar a imagem */
-  z-index: 1; /* Certifica-se de que o conteúdo fique acima */
+  padding: var(--padding-large);
+  z-index: 1;
 }
 
 .carousel-slide::before {
@@ -19,53 +36,48 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.7)
-  );
-  z-index: -1; /* Mantém o fundo translúcido atrás */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+  z-index: -1;
 }
 
 .carousel-content {
   display: flex;
-  flex-direction: column; /* Organiza os elementos em coluna */
-  justify-content: flex-start; /* Alinha os itens no topo da div */
-  align-items: flex-start; /* Alinha os itens à esquerda */
-  max-width: 800px; /* Define uma largura máxima para a div */
-  margin: 0 auto; /* Centraliza a div horizontalmente */
-  padding: 20px; /* Adiciona espaçamento interno */
-  /*background: rgba(0, 0, 0, 0.5);  Fundo semitransparente */
-  border-radius: 10px; /* Bordas arredondadas */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--padding-medium);
+  border-radius: 10px;
   position: relative;
-  left: -190px; /* Ajusta para mover um pouco para a esquerda */
+  left: -190px;
 }
 
 .carousel-title,
 .carousel-description {
-  margin: 0 0 10px 0; /* Adiciona espaçamento entre os textos */
-  text-align: left; /* Garante o alinhamento à esquerda */
-  color: white; /* Texto em branco */
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* Adiciona sombra para contraste */
+  margin: 0 0 10px 0;
+  text-align: left;
+  color: var(--text-white);
+  text-shadow: 0 2px 6px var(--shadow-color);
 }
 
 .carousel-title {
-  font-size: 24px; /* Tamanho da fonte do título */
+  font-size: var(--font-size-large);
   font-weight: bold;
 }
 
 .carousel-description {
-  font-size: 16px; /* Tamanho da fonte da descrição */
+  font-size: var(--font-size-small);
 }
 
 .watch-button {
-  align-self: flex-start; /* Garante que o botão fique alinhado à esquerda */
-  margin-top: 10px; /* Espaçamento superior */
-  padding: 10px 25px;
-  background-color: #e50914; /* Netflix Red */
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: var(--padding-small) 25px;
+  background-color: var(--netflix-red);
   border: none;
-  color: white;
-  font-size: 18px;
+  color: var(--text-white);
+  font-size: var(--font-size-medium);
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
@@ -73,84 +85,79 @@
 }
 
 .watch-button:hover {
-  background-color: #b20710; /* Symbol Dark Red */
+  background-color: var(--netflix-dark-red);
 }
 
 .modal {
-  position: fixed; /* Garante que o modal fique fixo na janela */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.95
-  ); /* Fundo preto com leve transparência */
+  background-color: rgba(0, 0, 0, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10000; /* Aumenta a prioridade para garantir sobreposição */
+  z-index: 10000;
 }
 
 .modal-content {
-  position: relative; /* Permite o posicionamento do botão fechar */
-  background: #181818; /* Fundo preto da Netflix */
+  position: relative;
+  background: var(--background-black);
   padding: 30px;
-  border-radius: 8px; /* Bordas arredondadas */
+  border-radius: 8px;
   width: 90%;
   max-width: 800px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8); /* Sombra para profundidade */
-  color: white; /* Texto em branco */
-  z-index: 10001; /* Garantia de sobreposição dentro do modal */
+  box-shadow: 0 4px 10px var(--shadow-color);
+  color: var(--text-white);
+  z-index: 10001;
 }
 
 .close-button {
-  position: absolute; /* Posicionado no canto superior direito */
+  position: absolute;
   top: 15px;
   right: 15px;
-  background: #e50914; /* Netflix Red */
+  background: var(--netflix-red);
   border: none;
-  color: white; /* Texto branco */
-  font-size: 16px;
+  color: var(--text-white);
+  font-size: var(--font-size-small);
   font-weight: bold;
   padding: 0px 20px;
   cursor: pointer;
-  border-radius: 4px; /* Bordas retangulares com leve arredondamento */
-  transition: transform 0.2s ease-in-out; /* Adiciona o efeito de zoom */
+  border-radius: 4px;
+  transition: transform 0.2s ease-in-out;
 }
 
 .close-button:hover {
-  transform: scale(1.1); /* Zoom no hover */
+  transform: scale(1.1);
 }
 
 .close-button:focus {
-  outline: none; /* Remove o outline ao clicar */
+  outline: none;
 }
 
-/* Responsividade */
+/* Responsiveness */
 @media (max-width: 768px) {
   .carousel-slide {
-    padding: 20px;
+    padding: var(--padding-medium);
   }
 
   .carousel-content {
-    max-width: 90%; /* Ajusta a largura máxima */
-    padding: 15px; /* Reduz o padding */
-    left: 0; /* Remove deslocamento lateral */
+    max-width: 90%;
+    padding: 15px;
+    left: 0;
   }
 
   .carousel-title {
-    font-size: 20px; /* Reduz o tamanho do título */
+    font-size: var(--font-size-medium);
   }
 
   .carousel-description {
-    font-size: 14px; /* Reduz o tamanho da descrição */
+    font-size: var(--font-size-xsmall);
   }
 
   .watch-button {
-    font-size: 16px; /* Reduz o tamanho do texto do botão */
+    font-size: var(--font-size-small);
     padding: 8px 20px;
   }
 
@@ -162,20 +169,20 @@
 
 @media (max-width: 480px) {
   .carousel-content {
-    max-width: 95%; /* Mais estreito para telas muito pequenas */
-    padding: 10px;
+    max-width: 95%;
+    padding: var(--padding-small);
   }
 
   .carousel-title {
-    font-size: 18px;
+    font-size: var(--font-size-small);
   }
 
   .carousel-description {
-    font-size: 12px;
+    font-size: var(--font-size-xxsmall);
   }
 
   .watch-button {
-    font-size: 14px;
+    font-size: var(--font-size-xxsmall);
     padding: 6px 15px;
   }
 }
