@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 import "./SocialMedia.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFacebook,
-  faTwitter,
-  faInstagram,
+  faGithub,
   faLinkedin,
+  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { faFileAlt } from "@fortawesome/free-solid-svg-icons";
 
 const socialMediaLinks = [
-  { href: "https://facebook.com", icon: faFacebook, label: "Facebook" },
-  { href: "https://twitter.com", icon: faTwitter, label: "Twitter" },
-  { href: "https://instagram.com", icon: faInstagram, label: "Instagram" },
-  { href: "https://linkedin.com", icon: faLinkedin, label: "LinkedIn" },
+  { href: "https://github.com/dimaswebdev", icon: faGithub, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/dimas-dimasdesigner/", icon: faLinkedin, label: "LinkedIn" },
+  { href: "https://www.instagram.com/dimas_bm193/", icon: faInstagram, label: "Instagram" },
+  { href: `${process.env.PUBLIC_URL}/curriculo-dimas.pdf`, icon: faFileAlt, label: "Currículo" },
 ];
 
 const SocialMediaLink = ({ href, icon, label }) => (

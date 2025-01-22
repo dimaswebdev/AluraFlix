@@ -7,22 +7,22 @@ import "./Carousel.css";
 
 const videos = [
   {
+    title: "Como Começar um Canal de React no YouTube em 2025? (Passo a Passo Revelado)",
+    description: "Dicas para iniciar um canal de react no YouTube em 2025.",
+    image: "https://img.youtube.com/vi/c-D7uV2CiFQ/maxresdefault.jpg",
+    videoUrl: "c-D7uV2CiFQ",
+  },
+  {
     title: "Como aprender programação de forma INTELIGENTE, sem perder tempo com coisas INÚTEIS",
     description: "Dicas e estratégias para aprender programação de maneira eficiente, focando no que realmente importa.",
     image: "https://img.youtube.com/vi/OqiuC8bdxb4/maxresdefault.jpg",
     videoUrl: "OqiuC8bdxb4",
   },
   {
-    title: "Como CRIAR um Canal de REACT RÁPIDO? (Passo a Passo)",
+    title: "Curso completo de HTML - seu PRIMEIRO SITE DO ZERO para iniciar em PROGRAMAÇÃO!",
     description: "Saiba como criar e monetizar um canal de react no YouTube.",
-    image: "https://img.youtube.com/vi/no1yHN5YsdA/maxresdefault.jpg",
-    videoUrl: "no1yHN5YsdA",
-  },
-  {
-    title: "Como Começar um Canal de React no YouTube em 2025? (Passo a Passo Revelado)",
-    description: "Dicas para iniciar um canal de react no YouTube em 2025.",
-    image: "https://img.youtube.com/vi/c-D7uV2CiFQ/maxresdefault.jpg",
-    videoUrl: "c-D7uV2CiFQ",
+    image: "https://img.youtube.com/vi/Fhy-5CtVkiM/maxresdefault.jpg",
+    videoUrl: "Fhy-5CtVkiM",
   },
 ];
 
