@@ -4,14 +4,14 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9); /* Fundo preto translúcido */
+  /*background: rgba(0, 0, 0, 0.9);  Fundo preto translúcido */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000; /* Certifique-se de que o modal aparece acima de tudo */
 }
 
-.popup-content {
+.popup-content  {
   background: rgba(
     25,
     25,
@@ -23,18 +23,19 @@
   width: 90%;
   max-width: 500px; /* Define a largura máxima */
   max-height: 90%; /* Define altura máxima para dispositivos menores */
-  text-align: center;
+  text-align: right;
   position: relative;
   overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
 }
 
 .close-button {
   position: absolute;
-  top: 16px;
+  top: -16px;
   right: 16px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: bold;
   color: #e50914; /* Netflix Red */
   cursor: pointer;
 }
@@ -72,13 +73,14 @@
 .popup-content select:focus {
   outline: none;
   border-color: #e50914; /* Destaque ao focar */
-  box-shadow: 0 0 4px #e50914;
+  
 }
 
 .popup-buttons {
   display: flex;
   justify-content: space-around;
   margin-top: 16px;
+  gap: 16px;
 }
 
 .popup-buttons button {
@@ -100,12 +102,12 @@
 }
 
 .popup-buttons button:last-child {
-  background-color: transparent;
+  
   border: 1px solid #e50914;
 }
 
 .popup-buttons button:last-child:hover {
-  background-color: rgba(229, 9, 20, 0.2); /* Transparência com Netflix Red */
+  background-color: #b20710; /* Transparência com Netflix Red */
 }
 
 @media (max-width: 768px) {

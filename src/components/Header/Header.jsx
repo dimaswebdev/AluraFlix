@@ -6,18 +6,24 @@ import {
   faSearch,
   faHome,
   faPlusCircle,
+  faSignInAlt,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { auth, onAuthStateChanged } from "../../firebase";
+import { signOut } from "firebase/auth";
+import LoginModal from "../LoginModal";
 
 function Header({ onAddVideo }) {
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showTooltip, setShowTooltip] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); // Novo estado para monitorar rolagem
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const searchInputRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Verifica se o usuário rolou para baixo
       if (window.scrollY > 10) {
         setIsScrolled(true);
       } else {
@@ -25,13 +31,19 @@ function Header({ onAddVideo }) {
       }
     };
 
-    // Adiciona o evento de rolagem
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      // Remove o evento ao desmontar o componente
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const handleSearchClick = () => {
@@ -45,7 +57,6 @@ function Header({ onAddVideo }) {
   };
 
   const handleSearchBlur = (e) => {
-    // Verifica se o clique foi fora do campo de pesquisa
     if (!e.currentTarget.contains(e.relatedTarget)) {
       setSearchOpen(false);
       setSearchQuery("");
@@ -65,6 +76,14 @@ function Header({ onAddVideo }) {
     );
   };
 
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => alert("Logout realizado com sucesso!"))
+      .catch((error) => alert("Erro ao sair: " + error.message));
+  };
+
+  const isAdmin = user?.email === "admin@aluraflix.com";
+
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-content">
@@ -74,11 +93,10 @@ function Header({ onAddVideo }) {
         </div>
 
         <div className="icons-container">
-          {/* Barra de Pesquisa */}
           <div
             className={`search-container ${isSearchOpen ? "search-open" : ""}`}
-            onBlur={handleSearchBlur} // Detecta clique fora
-            tabIndex="-1" // Necessário para o evento Blur funcionar corretamente
+            onBlur={handleSearchBlur}
+            tabIndex="-1"
           >
             <input
               type="text"
@@ -103,12 +121,32 @@ function Header({ onAddVideo }) {
             <span>Home</span>
           </div>
 
-          <div className="icon-item" onClick={onAddVideo}>
-            <FontAwesomeIcon icon={faPlusCircle} />
-            <span>Adicionar Vídeo</span>
-          </div>
+          {isAdmin && (
+            <div className="icon-item" onClick={onAddVideo}>
+              <FontAwesomeIcon icon={faPlusCircle} />
+              <span>Adicionar Vídeo</span>
+            </div>
+          )}
+
+          {user ? (
+            <>
+              <div className="icon-item user-email">
+                <span>{user.email}</span>
+              </div>
+              <div className="icon-item" onClick={handleLogout}>
+                <FontAwesomeIcon icon={faSignOutAlt} />
+                <span>Logout</span>
+              </div>
+            </>
+          ) : (
+            <div className="icon-item" onClick={() => setIsModalOpen(true)}>
+              <FontAwesomeIcon icon={faSignInAlt} />
+              <span>Login</span>
+            </div>
+          )}
         </div>
       </div>
+      {isModalOpen && <LoginModal onClose={() => setIsModalOpen(false)} />}
     </header>
   );
 }

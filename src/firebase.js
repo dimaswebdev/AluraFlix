@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AZzaSyCwOaEvhOo5oaf9tN0FCs4CcZz8aHXF4h8",
+  apiKey: "AIzaSyCwOaEvhOc5oaf9tNOFCs4CcZz8aHXF4h8", // Chave de API fornecida
   authDomain: "aluraflix-92b4f.firebaseapp.com",
   databaseURL: "https://aluraflix-92b4f-default-rtdb.firebaseio.com",
   projectId: "aluraflix-92b4f",
@@ -18,4 +19,8 @@ const app = initializeApp(firebaseConfig);
 // Inicializa o Realtime Database
 const database = getDatabase(app);
 
-export { database };
+// Inicializa o Firebase Authentication
+const auth = getAuth(app);
+
+// Exporta serviços e métodos úteis
+export { database, auth, onAuthStateChanged, signOut, signInWithEmailAndPassword };

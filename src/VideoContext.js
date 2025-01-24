@@ -1,5 +1,5 @@
-
 import React, { createContext, useState, useContext } from "react";
+import { getAuth } from "firebase/auth"; // Import Firebase Authentication
 
 const VideoContext = createContext();
 
@@ -28,8 +28,25 @@ export const VideoProvider = ({ children }) => {
     }
   ]);
 
-  const addVideo = (newVideo) => setVideos((prev) => [...prev, newVideo]);
-  const deleteVideo = (id) => setVideos((prev) => prev.filter((video) => video.id !== id));
+  const auth = getAuth(); // Initialize Firebase Auth
+
+  const addVideo = (newVideo) => {
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Você precisa estar autenticado para adicionar vídeos.");
+      return;
+    }
+    setVideos((prev) => [...prev, newVideo]);
+  };
+
+  const deleteVideo = (id) => {
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Você precisa estar autenticado para excluir vídeos.");
+      return;
+    }
+    setVideos((prev) => prev.filter((video) => video.id !== id));
+  };
 
   return (
     <VideoContext.Provider value={{ videos, addVideo, deleteVideo }}>
