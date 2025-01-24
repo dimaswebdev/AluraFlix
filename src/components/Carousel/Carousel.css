@@ -113,28 +113,9 @@
   z-index: 10001;
 }
 
-.close-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: var(--netflix-red);
-  border: none;
-  color: var(--text-white);
-  font-size: var(--font-size-small);
-  font-weight: bold;
-  padding: 0px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: transform 0.2s ease-in-out;
-}
 
-.close-button:hover {
-  transform: scale(1.1);
-}
 
-.close-button:focus {
-  outline: none;
-}
+
 
 /* Responsiveness */
 @media (max-width: 768px) {

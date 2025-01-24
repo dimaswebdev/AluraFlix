@@ -45,6 +45,7 @@ function Popup({ isOpen, onClose, onAdd, sections }) {
   }
 
   return (
+  
     <div className="popup-overlay">
       <div className="popup-content">
         <button className="close-button" onClick={onClose}>

@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import PropTypes from "prop-types";
 import "./VideoGallery.css";
 
-const VideoSlide = ({ video, isPlaying, onPlay, onDelete }) => (
+const VideoSlide = ({ video, isPlaying, onPlay, onDelete, showDelete }) => (
   <div className="video-slide">
     {!isPlaying ? (
       <img
@@ -23,9 +23,11 @@ const VideoSlide = ({ video, isPlaying, onPlay, onDelete }) => (
     )}
     <div className="video-details">
       <h3>{video.title}</h3>
-      <button className="delete-button" onClick={() => onDelete(video.id)}>
-        Excluir
-      </button>
+      {showDelete && (
+        <button className="delete-button" onClick={() => onDelete(video.id)}>
+          Excluir
+        </button>
+      )}
     </div>
   </div>
 );
@@ -40,9 +42,10 @@ VideoSlide.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   onPlay: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  showDelete: PropTypes.bool.isRequired,
 };
 
-function VideoGallery({ sectionTitle, videos, onDelete }) {
+function VideoGallery({ sectionTitle, videos, onDelete, user }) {
   const [playingVideos, setPlayingVideos] = useState(
     videos.map(() => false)
   );
@@ -94,6 +97,8 @@ function VideoGallery({ sectionTitle, videos, onDelete }) {
     };
   }, [handleClickOutside]);
 
+  const isAdmin = user?.email === "admin@aluraflix.com";
+
   return (
     <div className="video-gallery">
       <h2 className="section-title">{sectionTitle}</h2>
@@ -106,6 +111,7 @@ function VideoGallery({ sectionTitle, videos, onDelete }) {
               isPlaying={playingVideos[index]}
               onPlay={() => handlePlayVideo(index)}
               onDelete={onDelete}
+              showDelete={isAdmin} // Apenas administradores podem excluir vídeos
             />
           ))}
         </Slider>
@@ -125,6 +131,13 @@ VideoGallery.propTypes = {
     })
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    email: PropTypes.string,
+  }),
+};
+
+VideoGallery.defaultProps = {
+  user: null,
 };
 
 export default VideoGallery;
