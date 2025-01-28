@@ -18,6 +18,7 @@ function Home() {
   const [user, setUser] = useState(null);
   const [editingVideo, setEditingVideo] = useState(null);
 
+  // 🔹 Monitora autenticação do usuário
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -27,6 +28,7 @@ function Home() {
     return () => unsubscribe();
   }, []);
 
+  // 🔹 Sincroniza os vídeos com o Firebase
   useEffect(() => {
     if (user) {
       const sectionsRef = ref(database, "videoSections");
@@ -40,6 +42,7 @@ function Home() {
     }
   }, [user]);
 
+  // 🔹 Salva os dados no Firebase
   const saveSectionsToFirebase = useCallback((updatedSections) => {
     const sectionsRef = ref(database, "videoSections");
     const formattedData = updatedSections.reduce((acc, section) => {
@@ -49,6 +52,7 @@ function Home() {
     set(sectionsRef, formattedData);
   }, []);
 
+  // 🔹 Adiciona um novo vídeo a uma seção
   const addVideo = useCallback(
     (video, sectionTitle) => {
       if (!user || user.email !== "admin@aluraflix.com") {
@@ -81,6 +85,7 @@ function Home() {
     [sections, saveSectionsToFirebase, user]
   );
 
+  // 🔹 Edita um vídeo sem removê-lo da lista
   const editVideo = useCallback(
     (updatedVideo, newSectionTitle) => {
       if (!user || user.email !== "admin@aluraflix.com") {
@@ -88,21 +93,37 @@ function Home() {
         return;
       }
 
+      let videoMoved = false;
       const updatedSections = sections.map((section) => {
         if (section.videos.some((video) => video.id === updatedVideo.id)) {
-          return {
-            ...section,
-            videos: section.videos.filter((video) => video.id !== updatedVideo.id),
-          };
-        }
-        if (section.title === newSectionTitle) {
-          return {
-            ...section,
-            videos: [...section.videos, updatedVideo],
-          };
+          if (section.title !== newSectionTitle) {
+            // Remove o vídeo da seção original
+            videoMoved = true;
+            return {
+              ...section,
+              videos: section.videos.filter((video) => video.id !== updatedVideo.id),
+            };
+          } else {
+            // Apenas atualiza os dados do vídeo
+            return {
+              ...section,
+              videos: section.videos.map((video) =>
+                video.id === updatedVideo.id ? { ...video, ...updatedVideo } : video
+              ),
+            };
+          }
         }
         return section;
       });
+
+      // Se o vídeo mudou de seção, adicionamos na nova
+      if (videoMoved) {
+        updatedSections.forEach((section) => {
+          if (section.title === newSectionTitle) {
+            section.videos.push(updatedVideo);
+          }
+        });
+      }
 
       setSections(updatedSections);
       saveSectionsToFirebase(updatedSections);
@@ -110,6 +131,7 @@ function Home() {
     [sections, saveSectionsToFirebase, user]
   );
 
+  // 🔹 Exclui um vídeo
   const deleteVideo = useCallback(
     (videoId, sectionTitle) => {
       if (!user || user.email !== "admin@aluraflix.com") {
@@ -131,10 +153,12 @@ function Home() {
     [sections, saveSectionsToFirebase, user]
   );
 
+  // 🔹 Vídeos recomendados para o Carousel
   const recommendedVideos =
     sections.find((section) => section.title === "Recomendado para Você")
       ?.videos || [];
 
+  // 🔹 Faz logout do usuário
   const handleLogout = () => {
     signOut(auth).then(() => {
       setUser(null);
@@ -142,11 +166,13 @@ function Home() {
     });
   };
 
+  // 🔹 Abre o modal de edição
   const openEditPopup = (video) => {
     setEditingVideo(video);
     setPopupOpen(true);
   };
 
+  // 🔹 Se o usuário não estiver autenticado, exibe o modal de login
   if (isModalOpen) {
     return <LoginModal onClose={() => setIsModalOpen(false)} />;
   }

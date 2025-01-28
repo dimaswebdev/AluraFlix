@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import "./Popup.css";
 
@@ -9,7 +9,16 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
   const [details, setDetails] = useState("");
   const [selectedSection, setSelectedSection] = useState(sections[0]?.title || "");
 
-  // Preenche os campos no modo de edição ou limpa no modo de adição
+  // 🔹 Função para limpar os campos do formulário
+  const resetForm = useCallback(() => {
+    setUrl("");
+    setTitle("");
+    setDescription("");
+    setDetails("");
+    setSelectedSection(sections[0]?.title || "");
+  }, [sections]);
+
+  // 🔹 Atualiza os campos quando um vídeo está sendo editado
   useEffect(() => {
     if (isEditing && videoData) {
       setUrl(`https://www.youtube.com/watch?v=${videoData.id}` || "");
@@ -18,23 +27,21 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
       setDetails(videoData.details || "");
       setSelectedSection(videoData.section || sections[0]?.title || "");
     } else {
-      setUrl("");
-      setTitle("");
-      setDescription("");
-      setDetails("");
-      setSelectedSection(sections[0]?.title || "");
+      resetForm();
     }
-  }, [isEditing, videoData, sections]);
+  }, [isEditing, videoData, sections, resetForm]); // ✅ Corrigido: Adicionamos `resetForm` nas dependências
 
+  // 🔹 Extrai o ID do vídeo do YouTube a partir da URL
   const extractYouTubeId = (youtubeUrl) => {
-    const regex =
-      /(?:[?&]v=|\/embed\/|\.be\/|\/v\/|\/vi\/|\/watch\?v=)([a-zA-Z0-9_-]{11})/;
+    const regex = /(?:[?&]v=|\/embed\/|\.be\/|\/v\/|\/vi\/|\/watch\?v=)([a-zA-Z0-9_-]{11})/;
     const match = youtubeUrl.match(regex);
     return match ? match[1] : null;
   };
 
+  // 🔹 Lógica de submissão do formulário (adicionar ou editar)
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const videoId = isEditing ? videoData.id : extractYouTubeId(url);
     if (!videoId) {
       alert("URL do vídeo inválida. Por favor, insira uma URL válida do YouTube.");
@@ -52,14 +59,22 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
     };
 
     if (isEditing) {
-      onEdit(videoPayload, selectedSection); // Envia os dados editados e a nova seção
+      onEdit(videoPayload, selectedSection);
     } else {
-      onAdd(videoPayload, selectedSection); // Adiciona o vídeo à seção selecionada
+      onAdd(videoPayload, selectedSection);
     }
 
+    resetForm();
     onClose();
   };
 
+  // 🔹 Fecha o modal e limpa os campos
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
+  // 🔹 Retorna null se o modal não estiver aberto
   if (!isOpen) {
     return null;
   }
@@ -67,7 +82,7 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <button className="close-button" onClick={onClose}>
+        <button className="close-button" onClick={handleClose}>
           X
         </button>
         <h2>{isEditing ? "Editar Vídeo" : "Adicionar Vídeo"}</h2>
@@ -87,6 +102,7 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
             placeholder="URL do vídeo do YouTube"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
+            disabled={isEditing}
           />
           <input
             type="text"
@@ -107,7 +123,7 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
           />
           <div className="popup-buttons">
             <button type="submit">{isEditing ? "Salvar Alterações" : "Adicionar"}</button>
-            <button type="button" onClick={onClose}>
+            <button type="button" onClick={handleClose}>
               Cancelar
             </button>
           </div>
