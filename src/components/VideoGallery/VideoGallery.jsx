@@ -82,7 +82,7 @@ function VideoGallery({ sectionTitle, videos, onDelete, onEdit, user }) {
     centerMode: true,
     infinite: true,
     centerPadding: "50px",
-    slidesToShow: 3,
+    slidesToShow: 4,
     speed: 500,
     responsive: [
       {

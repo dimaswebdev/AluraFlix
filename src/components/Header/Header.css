@@ -85,11 +85,15 @@ header.scrolled {
   width: 0;
   opacity: 0;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   outline: none;
   font-size: 1rem;
   transition: all 0.3s ease;
+  background: #333; /* Fundo escuro */
+  color: white;
 }
+
+
 
 .search-container.search-open .search-input {
   width: 400px; /* Largura expandida */
