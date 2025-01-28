@@ -13,21 +13,20 @@ import "./Home.css";
 
 function Home() {
   const [isPopupOpen, setPopupOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true); // Modal inicial visível
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [sections, setSections] = useState([]);
   const [user, setUser] = useState(null);
+  const [editingVideo, setEditingVideo] = useState(null);
 
-  // Observa mudanças no estado de login
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setIsModalOpen(!currentUser); // Exibe o modal de login se não houver usuário autenticado
+      setIsModalOpen(!currentUser);
     });
 
     return () => unsubscribe();
   }, []);
 
-  // Sincroniza com o Firebase ao carregar o componente
   useEffect(() => {
     if (user) {
       const sectionsRef = ref(database, "videoSections");
@@ -41,7 +40,6 @@ function Home() {
     }
   }, [user]);
 
-  // Salva as seções no Firebase
   const saveSectionsToFirebase = useCallback((updatedSections) => {
     const sectionsRef = ref(database, "videoSections");
     const formattedData = updatedSections.reduce((acc, section) => {
@@ -51,7 +49,6 @@ function Home() {
     set(sectionsRef, formattedData);
   }, []);
 
-  // Adiciona vídeo à seção (somente admin)
   const addVideo = useCallback(
     (video, sectionTitle) => {
       if (!user || user.email !== "admin@aluraflix.com") {
@@ -84,7 +81,35 @@ function Home() {
     [sections, saveSectionsToFirebase, user]
   );
 
-  // Exclui vídeo da seção (somente admin)
+  const editVideo = useCallback(
+    (updatedVideo, newSectionTitle) => {
+      if (!user || user.email !== "admin@aluraflix.com") {
+        alert("Apenas administradores podem editar vídeos.");
+        return;
+      }
+
+      const updatedSections = sections.map((section) => {
+        if (section.videos.some((video) => video.id === updatedVideo.id)) {
+          return {
+            ...section,
+            videos: section.videos.filter((video) => video.id !== updatedVideo.id),
+          };
+        }
+        if (section.title === newSectionTitle) {
+          return {
+            ...section,
+            videos: [...section.videos, updatedVideo],
+          };
+        }
+        return section;
+      });
+
+      setSections(updatedSections);
+      saveSectionsToFirebase(updatedSections);
+    },
+    [sections, saveSectionsToFirebase, user]
+  );
+
   const deleteVideo = useCallback(
     (videoId, sectionTitle) => {
       if (!user || user.email !== "admin@aluraflix.com") {
@@ -106,12 +131,10 @@ function Home() {
     [sections, saveSectionsToFirebase, user]
   );
 
-  // Vídeos recomendados para o Carousel
   const recommendedVideos =
     sections.find((section) => section.title === "Recomendado para Você")
       ?.videos || [];
 
-  // Realiza logout
   const handleLogout = () => {
     signOut(auth).then(() => {
       setUser(null);
@@ -119,22 +142,23 @@ function Home() {
     });
   };
 
-  // Renderiza apenas o modal de login se não houver usuário
+  const openEditPopup = (video) => {
+    setEditingVideo(video);
+    setPopupOpen(true);
+  };
+
   if (isModalOpen) {
     return <LoginModal onClose={() => setIsModalOpen(false)} />;
   }
 
-  // Página principal com conteúdo
   return (
     <div className="home">
       <div className="background-container">
         <div className="background-image"></div>
         <div className="background-gradient"></div>
       </div>
-
       <Header onAddVideo={() => setPopupOpen(true)} onLogout={handleLogout} />
       <Carousel videos={recommendedVideos} />
-
       <main>
         {sections.map((section) => (
           <VideoGallery
@@ -142,25 +166,31 @@ function Home() {
             sectionTitle={section.title}
             videos={section.videos}
             onDelete={(videoId) => deleteVideo(videoId, section.title)}
+            onEdit={(video) => openEditPopup(video)}
             user={user}
           />
         ))}
       </main>
-
-      {user.email === "admin@aluraflix.com" && (
+      {user?.email === "admin@aluraflix.com" && (
         <Popup
           isOpen={isPopupOpen}
-          onClose={() => setPopupOpen(false)}
+          onClose={() => {
+            setEditingVideo(null);
+            setPopupOpen(false);
+          }}
           onAdd={(video, sectionTitle) => addVideo(video, sectionTitle)}
+          onEdit={(updatedVideo, sectionTitle) =>
+            editVideo(updatedVideo, sectionTitle)
+          }
+          isEditing={!!editingVideo}
+          videoData={editingVideo}
           sections={sections.map((section) => ({
             id: section.id,
             title: section.title,
           }))}
         />
       )}
-
       <SocialMedia />
-      <div className="spacer"></div>
       <Footer />
     </div>
   );

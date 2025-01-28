@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import PropTypes from "prop-types";
 import "./VideoGallery.css";
 
-const VideoSlide = ({ video, isPlaying, onPlay, onDelete, showDelete }) => (
+const VideoSlide = ({ video, isPlaying, onPlay, onDelete, onEdit, showDelete, showEdit }) => (
   <div className="video-slide">
     {!isPlaying ? (
       <img
@@ -21,10 +21,34 @@ const VideoSlide = ({ video, isPlaying, onPlay, onDelete, showDelete }) => (
         className="video-iframe"
       ></iframe>
     )}
-    <div className="video-details">
-      <h3>{video.title}</h3>
+
+    {/* Conteúdo do vídeo: título e descrição */}
+    <div className="content">
+      <h3 className="video-title">{video.title}</h3>
+      <p className="video-description">
+        {video.description.length > 100
+          ? `${video.description.substring(0, 100)}...`
+          : video.description}
+      </p>
+    </div>
+
+    {/* Botões de ação */}
+    <div className="actions">
+      {showEdit && (
+        <button
+          className="edit-button"
+          onClick={() => onEdit(video)}
+          aria-label={`Editar ${video.title}`}
+        >
+          Editar
+        </button>
+      )}
       {showDelete && (
-        <button className="delete-button" onClick={() => onDelete(video.id)}>
+        <button
+          className="delete-button"
+          onClick={() => onDelete(video.id)}
+          aria-label={`Excluir ${video.title}`}
+        >
           Excluir
         </button>
       )}
@@ -36,16 +60,19 @@ VideoSlide.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     videoUrl: PropTypes.string.isRequired,
   }).isRequired,
   isPlaying: PropTypes.bool.isRequired,
   onPlay: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
   showDelete: PropTypes.bool.isRequired,
+  showEdit: PropTypes.bool.isRequired,
 };
 
-function VideoGallery({ sectionTitle, videos, onDelete, user }) {
+function VideoGallery({ sectionTitle, videos, onDelete, onEdit, user }) {
   const [playingVideos, setPlayingVideos] = useState(
     videos.map(() => false)
   );
@@ -111,7 +138,9 @@ function VideoGallery({ sectionTitle, videos, onDelete, user }) {
               isPlaying={playingVideos[index]}
               onPlay={() => handlePlayVideo(index)}
               onDelete={onDelete}
-              showDelete={isAdmin} // Apenas administradores podem excluir vídeos
+              onEdit={onEdit}
+              showDelete={isAdmin}
+              showEdit={isAdmin}
             />
           ))}
         </Slider>
@@ -126,11 +155,13 @@ VideoGallery.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
       videoUrl: PropTypes.string.isRequired,
     })
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
   user: PropTypes.shape({
     email: PropTypes.string,
   }),
