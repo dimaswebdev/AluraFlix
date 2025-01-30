@@ -1,12 +1,15 @@
 .footer {
-    background-color:#141414; /* Fundo escuro */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7) 0%, rgb(0, 0, 0) 50%);
     color: #808080; /* Texto branco */
     text-align: center; /* Centraliza o texto */
-    /* padding: 10px 20px; Espaçamento interno */
-    font-size: 14px; /* Tamanho da fonte */
+    padding: 10px 20px; 
+    font-size: 16px; /* Tamanho da fonte */
     position: fixed; /* Fixado na parte inferior */
     bottom: 0; /* Alinhado na base */
     width: 100%; /* Ocupa toda a largura */
-    border-top: 1px solid #808080;
+    /* border-top: 1px solid #808080; */
+    height: 50px;
+    z-index: 1001;
   }
   
+

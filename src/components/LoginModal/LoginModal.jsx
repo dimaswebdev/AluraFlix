@@ -33,19 +33,18 @@ const LoginModal = ({ onClose }) => {
   };
 
   return (
-    <div className="popup-overlay">
+    <div className="login-overlay">
       {/* Cabeçalho posicionado acima do modal */}
       <div className="welcome-header">
         <h1>Bem-vindo ao AluraFlix</h1>
         <h2>Seu novo portal de conhecimento!</h2>
       </div>
       <div>
-      <img src="/dimas-logo.png" alt="AluraFlix Logo" className="logoModal" />
+        <img src="/dimas-logo.png" alt="AluraFlix Logo" className="logoModal" />
       </div>
 
       {/* Modal de Login */}
-      <div className="popup-content">
-        
+      <div className="login-content">
         <h2>Login</h2>
         {tooltip && <div className="tooltip">{tooltip}</div>}
         <form>
@@ -83,6 +82,11 @@ const LoginModal = ({ onClose }) => {
           </div>
         </form>
       </div>
+
+      {/* Footer Adicionado */}
+      <footer className="footer">
+        © {new Date().getFullYear()} Dimas Designer - Todos os direitos reservados.
+      </footer>
     </div>
   );
 };

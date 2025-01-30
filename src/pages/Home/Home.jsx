@@ -217,6 +217,8 @@ function Home() {
         />
       )}
       <SocialMedia />
+       {/* Espaço antes do rodapé */}
+       <div className="spacer"></div>
       <Footer />
     </div>
   );

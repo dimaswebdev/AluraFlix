@@ -49,7 +49,7 @@ html, body {
 .slider-container {
   width: 100%;
   max-width: var(--max-width);
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 15px;
   border-radius: var(--border-radius);
   overflow: visible; /* Permite que os elementos cresçam além do contêiner */
@@ -150,7 +150,7 @@ html, body {
   border: none;
   cursor: pointer;
   transition: background-color var(--transition), transform var(--transition);
-  border-radius: 0;
+  border-radius: 4px;
 }
 
 .edit-button:hover,
@@ -163,12 +163,14 @@ html, body {
   color: white;
   max-width: var(--max-width);
   width: 100%;
-  margin: 25px auto 10px auto;
+  margin: 5px auto 10px auto;
   display: flex;
   justify-content: flex-start;
   font-size: 1.5rem;
   text-align: left;
-  padding-left: 20px;
+  border-bottom: 1px solid #808080;
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 /* ===== Ajustando o Tamanho dos Botões do Slick ===== */

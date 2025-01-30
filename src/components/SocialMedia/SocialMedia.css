@@ -1,7 +1,7 @@
 /* CSS Variables */
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #e50914;
+  --primary-color: #b20710;
+  --secondary-color: #ffffff;
   --icon-size: 2rem;
   --gap-size: 20px;
   --top-offset: 50px;
@@ -17,7 +17,7 @@
   position: fixed; /* Fixed position on screen */
   top: var(--top-offset); /* Distance from top */
   right: var(--right-offset); /* Distance from right */
-  z-index: 1000; /* Above other elements */
+  z-index: 1002; /* Above other elements */
 }
 
 .redes__elemento a {

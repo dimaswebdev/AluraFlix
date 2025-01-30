@@ -5,11 +5,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
-  background: transparent; /* Background padrão */
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.2); /* Background padrão */
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease; /* Suavidade */
@@ -26,7 +26,7 @@ header.scrolled {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   padding: 0 1rem;
 }
 
@@ -110,7 +110,7 @@ header.scrolled {
 }
 
 .search-btn:hover {
-  color: #ccc;
+  color: #b20710;
 }
 
 /* Tooltip */

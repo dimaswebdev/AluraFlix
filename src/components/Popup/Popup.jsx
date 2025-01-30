@@ -87,7 +87,7 @@ function Popup({ isOpen, onClose, onAdd, onEdit, isEditing, videoData, sections 
         </button>
         <h2>{isEditing ? "Editar Vídeo" : "Adicionar Vídeo"}</h2>
         <form onSubmit={handleSubmit}>
-          <select
+          <select className="custom-select"
             value={selectedSection}
             onChange={(e) => setSelectedSection(e.target.value)}
           >
